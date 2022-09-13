@@ -21,7 +21,7 @@ export const Register = (props) => {
             .then(res => res.json())
             .then(createdUser => {
                 if (createdUser.hasOwnProperty("id")) {
-                    localStorage.setItem("honey_user", JSON.stringify({
+                    localStorage.setItem("done_user", JSON.stringify({
                         id: createdUser.id,
                         staff: createdUser.isAdmin
                     }))
@@ -73,7 +73,7 @@ export const Register = (props) => {
                     <label htmlFor="phoneNumber"> Phone Number </label>
                     <input onChange={updateCustomer}
                         type="tel" id="phoneNumber" className="form-control"
-                        placeholder="Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required />
+                        placeholder="Phone Number" maxLength={10} required />
                 </fieldset>
                 <fieldset>
                     <input onChange={(evt) => {
