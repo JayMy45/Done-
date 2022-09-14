@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "./Tasks.css"
 
 export const TaskList = () => {
+
+    const navigate = useNavigate()
 
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
@@ -37,7 +40,7 @@ export const TaskList = () => {
                 <button className="btn btn__tasks">My Tasks</button>
             </div>
             <div className="btn__btn--div2">
-                <button className="btn btn__create">Create</button>
+                <button className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create</button>
             </div>
         </section>
 
@@ -51,8 +54,8 @@ export const TaskList = () => {
                                 <div className="task__manager">
                                     <button className="btn btn__assign">Assign a Task</button>
                                     <header><strong>Task Name</strong>   </header>
-                                    <button className="btn btn__update">UPDATE</button>
-                                    <button className="btn btn__delete">DELETE</button>
+                                    <button className="btn btn__update" onClick={() => navigate("/tasks/update")}>UPDATE</button>
+                                    <button className="btn btn__delete" onClick={() => navigate("/tasks/delete")}>DELETE</button>
                                 </div>
                             </section>
                         }
