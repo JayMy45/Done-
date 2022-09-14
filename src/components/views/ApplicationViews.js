@@ -11,7 +11,7 @@ export const ApplicationViews = () => {
 			<Route path="/" element={
 				<>
 					<h1>DONE<span>&#8253;</span></h1>
-					<div>Your one-stop shop for repairing your tech</div>
+					<div>Get Er' DONE<span>&#8253;</span></div>
 
 					<Outlet />
 				</>
