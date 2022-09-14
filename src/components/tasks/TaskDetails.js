@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import "./Tasks.css"
 
 export const TaskDetails = () => {
 
     const { taskId } = useParams()
     const [assignments, updateAssignments] = useState({
         task: "",
-
     })
+
+    const navigate = useNavigate()
 
 
     useEffect(
@@ -31,8 +33,8 @@ export const TaskDetails = () => {
         <section>
             <h2>Task Details</h2>
             <h4>Instructions</h4>
-            <div>{assignments.task.instructions} </div>
-            <button>Return to Task List</button>
+            <div className="done__assignment">{assignments.task.instructions} </div>
+            <button onClick={() => navigate("/tasks")}>Return to Task List</button>
             <button>Done</button>
         </section>
     </>

@@ -1,8 +1,9 @@
 .task__manager {
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     border: 2px solid black;
-    padding: .5rem;
+    padding: 1.5rem;
     border-radius: 15px;
     margin: 2rem;
 }
@@ -28,4 +29,11 @@
     width: 100px;
     margin: auto;
     text-align: center;
+}
+
+.done__assignment {
+    border: 2px dotted goldenrod;
+    margin-bottom: 2%;
+    border-radius: 15px;
+    padding: 2%;
 }
