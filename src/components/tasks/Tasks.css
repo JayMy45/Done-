@@ -23,3 +23,9 @@
 .btn__create {
     width: 200px;
 }
+
+.navbar__link {
+    width: 100px;
+    margin: auto;
+    text-align: center;
+}
