@@ -1,5 +1,6 @@
 .task__manager {
     display: flex;
+    justify-content: space-evenly;
     border: 2px solid black;
     padding: 1rem;
     border-radius: 15px;
