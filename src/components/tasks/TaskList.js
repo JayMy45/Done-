@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Tasks.css"
 
 export const TaskList = () => {
@@ -53,7 +53,7 @@ export const TaskList = () => {
                             return <section className="task" key={`task--${task.id}`}>
                                 <div className="task__manager">
                                     <button className="btn btn__assign">Assign a Task</button>
-                                    <header><strong>Task Name</strong>   </header>
+                                    <Link className="navbar__link" to="/tasks/details"><strong>Task Name</strong></Link>
                                     <button className="btn btn__update" onClick={() => navigate("/tasks/update")}>UPDATE</button>
                                     <button className="btn btn__delete" onClick={() => navigate("/tasks/delete")}>DELETE</button>
                                 </div>
