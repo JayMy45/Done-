@@ -15,7 +15,7 @@ export const Login = () => {
             .then(foundUsers => {
                 if (foundUsers.length === 1) {
                     const user = foundUsers[0]
-                    localStorage.setItem("honey_user", JSON.stringify({
+                    localStorage.setItem("done_user", JSON.stringify({
                         id: user.id,
                         staff: user.isStaff
                     }))

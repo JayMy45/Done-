@@ -8,6 +8,7 @@ export const TaskList = () => {
 
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
+    const [users, setUsers] = useState([])
 
     useEffect(
         () => {
@@ -22,6 +23,19 @@ export const TaskList = () => {
         []
     ) // 
 
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/users`) //go get all tickets
+                .then(response => response.json()) //get response back from server
+                .then((userArray) => {
+                    setUsers(userArray)  //setTickets is deconstructed above...a function...
+                })
+
+            // console.log("Initial state of tickets", tickets) //view the initial state of tickets  (one is a string the other a parameter from deconstructed variable above)
+        },
+        []
+    )
 
 
     useEffect(
@@ -56,6 +70,8 @@ export const TaskList = () => {
                                     <Link className="navbar__link" to="/tasks/details"><strong>Task Name</strong></Link>
                                     <button className="btn btn__update" onClick={() => navigate("/tasks/update")}>UPDATE</button>
                                     <button className="btn btn__delete" onClick={() => navigate("/tasks/delete")}>DELETE</button>
+
+
                                 </div>
                             </section>
                         }
