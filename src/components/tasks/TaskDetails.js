@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import "./Tasks.css"
 
 export const TaskDetails = () => {
 
@@ -31,20 +32,9 @@ export const TaskDetails = () => {
         <section>
             <h2>Task Details</h2>
             <h4>Instructions</h4>
-            <div>{assignments.task.instructions} </div>
+            <div className="done__assignment">{assignments.task.instructions} </div>
             <button>Return to Task List</button>
             <button>Done</button>
         </section>
     </>
 }
-
-/* <section className="tasks">
-    <header className="task__header">{task?.user?.fullName}</header>
-
-    <div>Email: {employee?.user?.email}</div>
-    <div>Specialty: {employee.specialty}</div>
-    <div>Rate: {employee.rate}</div>
-
-    <footer className="employee__footer">Currently working on {employee?.employeeTickets?.length} tickets</footer>
-
-</section> */
