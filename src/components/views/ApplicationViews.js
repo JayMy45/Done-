@@ -22,7 +22,8 @@ export const ApplicationViews = () => {
 				<Route path="tasks/create" element={<CreateTasks />} />
 				<Route path="tasks/delete" element={<DeleteTasks />} />
 				<Route path="tasks/update" element={<UpdateTasks />} />
-				<Route path="tasks/details" element={<TaskDetails />} />
+
+				<Route path="tasks/:taskId" element={<TaskDetails />} />
 				<Route path="/tasks/users" element={<UserLists />} />
 
 
@@ -31,4 +32,4 @@ export const ApplicationViews = () => {
 	)
 }
 
-
+{/* <Route path="tasks/details" element={<TaskDetails />} /> */ }
