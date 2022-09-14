@@ -4,6 +4,7 @@ import { DeleteTasks } from "../tasks/DeleteTask"
 import { TaskDetails } from "../tasks/TaskDetails"
 import { TaskList } from "../tasks/TaskList"
 import { UpdateTasks } from "../tasks/UpdateTasks"
+import { UserLists } from "../users/UserLists"
 
 export const ApplicationViews = () => {
 	return (
@@ -22,6 +23,7 @@ export const ApplicationViews = () => {
 				<Route path="tasks/delete" element={<DeleteTasks />} />
 				<Route path="tasks/update" element={<UpdateTasks />} />
 				<Route path="tasks/details" element={<TaskDetails />} />
+				<Route path="/tasks/users" element={<UserLists />} />
 
 
 			</Route>

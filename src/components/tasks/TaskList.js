@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Tasks.css"
 
-export const TaskList = () => {
+export const TaskList = ({ fullName, id }) => {
 
     const navigate = useNavigate()
 
@@ -12,7 +12,7 @@ export const TaskList = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/tasks`) //go get all tickets
+            fetch(`http://localhost:8088/tasks?_expand=type`) //go get all tickets
                 .then(response => response.json()) //get response back from server
                 .then((taskArray) => {
                     setTasks(taskArray)  //setTickets is deconstructed above...a function...
@@ -23,6 +23,12 @@ export const TaskList = () => {
         []
     ) // 
 
+    useEffect(
+        () => {
+            setFilteredTasks(tasks)
+        },
+        [tasks]
+    )
 
     useEffect(
         () => {
@@ -38,19 +44,10 @@ export const TaskList = () => {
     )
 
 
-    useEffect(
-        () => {
-            setFilteredTasks(tasks)
-        },
-        [tasks]
-    )
-
-
-
     return <><h2>List of Tasks</h2>
         <section className="btn__btn--section">
             <div>
-                <button className="btn btn__tasks">All Tasks</button>
+                <button className="btn btn__tasks" onClick={() => navigate("/tasks/users")}>All Tasks</button>
                 <button className="btn btn__tasks">My Tasks</button>
             </div>
             <div className="btn__btn--div2">
@@ -60,14 +57,36 @@ export const TaskList = () => {
 
         {
             <article className="tasks">
-                <h2>LIST OF TASKS</h2>
+                <h3>Task List</h3>
                 {
                     filteredTasks.map(
                         (task) => {
                             return <section className="task" key={`task--${task.id}`}>
                                 <div className="task__manager">
-                                    <button className="btn btn__assign">Assign a Task</button>
-                                    <Link className="navbar__link" to="/tasks/details"><strong>Task Name</strong></Link>
+
+                                    <fieldset>
+                                        <div className="form-group">
+                                            <label htmlFor="doneUser"></label>
+                                            <select id="doneUser" value={users.id}
+
+                                                onChange={(evt) => {
+                                                    const copy = { ...users }
+                                                    copy.productTypeId = evt.target.value
+                                                    setUsers(copy)
+                                                }}
+                                            >
+                                                <option value={0}>Assign a User</option>
+                                                {
+                                                    users.map(user => {
+                                                        return <option value={user.id} key={`user--${user.id}`}>{user.fullName}</option>
+                                                    })
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </fieldset>
+
+                                    <Link className="navbar__link" to="/tasks/details"><strong>{task.type.name}</strong></Link>
                                     <button className="btn btn__update" onClick={() => navigate("/tasks/update")}>UPDATE</button>
                                     <button className="btn btn__delete" onClick={() => navigate("/tasks/delete")}>DELETE</button>
 
