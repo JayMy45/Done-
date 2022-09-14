@@ -39,14 +39,3 @@ export const TaskDetails = () => {
         </section>
     </>
 }
-
-/* <section className="tasks">
-    <header className="task__header">{task?.user?.fullName}</header>
-
-    <div>Email: {employee?.user?.email}</div>
-    <div>Specialty: {employee.specialty}</div>
-    <div>Rate: {employee.rate}</div>
-
-    <footer className="employee__footer">Currently working on {employee?.employeeTickets?.length} tickets</footer>
-
-</section> */
