@@ -1,9 +1,9 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-import { CreateTasks } from "../create/CreateAssignment"
+import { CreateTasks } from "../create/CreateTasks"
 import { DeleteTasks } from "../tasks/DeleteTask"
 import { TaskDetails } from "../tasks/TaskDetails"
 import { TaskList } from "../tasks/TaskList"
-import { UpdateTasks } from "../tasks/UpdateTasks"
+import { UpdateTasks } from "../update/UpdateTasks"
 import { UserLists } from "../users/UserLists"
 
 export const ApplicationViews = () => {
