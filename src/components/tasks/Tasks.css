@@ -3,7 +3,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     border: 2px solid black;
-    padding: 1.5rem;
+    padding: 2rem;
     border-radius: 15px;
     margin: 2rem;
 }
@@ -36,4 +36,13 @@
     margin-bottom: 2%;
     border-radius: 15px;
     padding: 2%;
+}
+
+.task__user-fullName {
+    border: 1px dotted orange;
+    padding: 1rem;
+}
+
+.task__user-assigned {
+    text-align: center;
 }

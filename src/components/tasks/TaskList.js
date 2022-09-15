@@ -8,11 +8,11 @@ export const TaskList = ({ }) => {
 
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
-    const [users, setUsers] = useState([])
+
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/tasks?_expand=type`) //go get all tickets
+            fetch(`http://localhost:8088/tasks?_expand=type&_expand=user`) //go get all tickets
                 .then(response => response.json()) //get response back from server
                 .then((taskArray) => {
                     setTasks(taskArray)  //setTickets is deconstructed above...a function...
@@ -30,18 +30,19 @@ export const TaskList = ({ }) => {
         [tasks]
     )
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/users`)
-                .then(response => response.json())
-                .then((userArray) => {
-                    setUsers(userArray)
-                })
+    const deleteTaskButton = (task) => {
+        return fetch(`http://localhost:8088/tasks/${task.id}`, {
+            method: "DELETE"
+        })
+            .then(() => {
+                fetch(`http://localhost:8088/tasks?_expand=type`) //go get all tickets
+                    .then(response => response.json()) //get response back from server
+                    .then((taskArray) => {
+                        setTasks(taskArray)  //setTickets is deconstructed above...a function...
+                    })
+            })
+    }
 
-            // console.log("Initial state of tickets", tickets) //view the initial state of tickets  (one is a string the other a parameter from deconstructed variable above)
-        },
-        []
-    )
 
 
     return <><h2>List of Tasks</h2>
@@ -63,32 +64,16 @@ export const TaskList = ({ }) => {
                         (task) => {
                             return <section className="task" key={`task--${task.id}`}>
                                 <div className="task__manager">
-
                                     <fieldset>
-                                        <div className="form-group">
-                                            <label htmlFor="doneUser"></label>
-                                            <select id="doneUser" value={users.id}
-
-                                                onChange={(evt) => {
-                                                    const copy = { ...users }
-                                                    copy.productTypeId = evt.target.value
-                                                    setUsers(copy)
-                                                }}
-                                            >
-                                                <option value={0}>Assign a User</option>
-                                                {
-                                                    users.map(user => {
-                                                        return <option value={user.id} key={`user--${user.id}`}>{user.fullName}</option>
-                                                    })
-                                                }
-                                            </select>
-
+                                        <div className="task__user-assigned"><header><strong>Assigned to:</strong></header></div>
+                                        <div className="task__user-fullName">
+                                            <footer>{task?.user?.fullName}</footer>
                                         </div>
                                     </fieldset>
 
                                     <Link className="navbar__link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
-                                    <button className="btn btn__update" onClick={() => navigate("/tasks/update")}>UPDATE</button>
-                                    <button className="btn btn__delete" onClick={() => navigate("/tasks/delete")}>DELETE</button>
+                                    <button className="btn btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
+                                    <button className="btn btn__delete" onClick={() => deleteTaskButton(task)}>DELETE</button>
 
 
                                 </div>
