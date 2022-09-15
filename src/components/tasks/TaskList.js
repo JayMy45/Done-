@@ -9,6 +9,9 @@ export const TaskList = ({ }) => {
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
 
+    const localDoneUser = localStorage.getItem("done_user")
+    const doneUserObject = JSON.parse(localDoneUser)
+
 
     useEffect(
         () => {
@@ -25,7 +28,15 @@ export const TaskList = ({ }) => {
 
     useEffect(
         () => {
-            setFilteredTasks(tasks)
+            //employees
+            if (doneUserObject.admin) {
+                setFilteredTasks(tasks)
+
+            } else {
+                //customers
+                const myTasks = tasks.filter(task => task.userId === doneUserObject.id)
+                setFilteredTasks(myTasks)
+            }
         },
         [tasks]
     )
@@ -72,8 +83,10 @@ export const TaskList = ({ }) => {
                                     </fieldset>
 
                                     <Link className="navbar__link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
-                                    <button className="btn btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
-                                    <button className="btn btn__delete" onClick={() => deleteTaskButton(task)}>DELETE</button>
+                                    <button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
+                                    <button className="btn btn__ticketList btn__delete" onClick={() => deleteTaskButton(task)}>DELETE</button>
+                                    <button className="btn btn btn__done"><strong>DONE<span>&#8253;</span></strong></button>
+
 
 
                                 </div>

@@ -3,13 +3,14 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     border: 2px solid black;
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 15px;
     margin: 2rem;
 }
 
 .btn:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+
 }
 
 .btn__tasks {
@@ -41,8 +42,31 @@
 .task__user-fullName {
     border: 1px dotted orange;
     padding: 1rem;
+    border-radius: 30px;
+    background-color: beige;
 }
 
 .task__user-assigned {
     text-align: center;
+}
+
+.btn__done {
+    background-color: rgb(127, 191, 78);
+
+
+}
+
+.btn__ticketList {
+    height: 20%;
+    margin: 1%;
+}
+
+.btn__update {
+    background-color: rgb(98, 115, 152);
+    color: azure;
+}
+
+.btn__delete {
+    background-color: rgb(175, 109, 109);
+    color: azure;
 }
