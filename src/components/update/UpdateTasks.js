@@ -1,74 +1,62 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate, useParams } from "react-router-dom"
 
 export const UpdateTasks = () => {
 
     const navigate = useNavigate()
 
-    const [users, setUsers] = useState([])
-    const [types, setTypes] = useState([])
+    const { taskId } = useParams()
 
+    // TODO: Provide initial state for profile
+
+    const [updates, setUpdates] = useState({
+        instructions: ""
+    })
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/types`)
+            fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${taskId}`)
                 .then(response => response.json())
-                .then((typesArray) => {
-                    setTypes(typesArray)
+                .then((data) => {
+                    const singleUpdate = data[0]
+                    setUpdates(singleUpdate)
                 })
 
 
         },
-        []
+        [taskId]
     )
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/users`)
-                .then(response => response.json())
-                .then((usersArray) => {
-                    setUsers(usersArray)
-                })
+    // TODO: Get employee profile info from API and update state
 
 
-        },
-        []
-    )
+    const handleCreateNewTasks = (event) => {
+        event.preventDefault()
 
-    // This module will create a new task by updating/POST to database directly
+        const toBeSavedToAPI = {
+            userId: updates.userId,
+            completion: updates.task.completion,
+            instructions: updates.task.instructions,
+            typeId: updates.task.typeId
+        }
 
-    /*
-      "assignments": [
-        {
-          "id": 1,
-          "userId": 3,
-          "taskId": 1
-        },
-    
-        Tasks
-        {
-          "id": 1,
-          "userId": 3,
-          "completion": false,
-          "instructions": "Rinse dishes after scrapping food and debris.  Then load dishwasher.  Use new pouches under the sink.  Be sure to wash my lunch bowl and Yeti cup.",
-          "typeId": 1
-        },
-    
-          "types": [
-        {
-          "id": 1,
-          "name": "Clean Kitchen",
-          "locationId": 2
-        },
-    "location"
-           {
-          "id": 1,
-          "location": "Bedroom"
-        },
-    
-    
-    */
+        return fetch(`http://localhost:8088/tasks/${taskId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(toBeSavedToAPI)
+        })
+            .then(response => response.json())
+            .then(() => {
+                navigate("/tasks")
+            })
 
+        /*
+            TODO: Perform the PUT fetch() call here to update the profile.
+            Navigate user to home page when done.
+        */
+    }
     //initial state of newTasks will provide the following information:
     const [newTasks, setNewTasks] = useState({
         userId: 0,
@@ -76,51 +64,6 @@ export const UpdateTasks = () => {
         instructions: "",
         typeId: 0
     })
-
-
-    const createNewTasks = (event) => {
-        event.preventDefault()
-
-        const newTaskDatabase = {
-            userId: parseInt(newTasks.userId),
-            completion: false,
-            instructions: newTasks.instructions,
-            typeId: parseInt(newTasks.typeId)
-        }
-
-        const newAssignmentDatabase = {
-            userId: parseInt(newTasks.userId),
-            //only need userId here.  taskId will be added in first POST.
-        }
-
-
-        fetch(`http://localhost:8088/tasks`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newTaskDatabase)
-        })
-            .then(response => response.json())
-            .then((newTaskObject) => {
-                //update updatedHire State...
-                newAssignmentDatabase.taskId = newTaskObject.id //add taskId to newAssignmentDatabase
-
-                fetch(`http://localhost:8088/assignments`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(newAssignmentDatabase)
-                })
-                    .then(response => response.json())
-                    .then((newAssignmentUpdate) => {
-                        navigate("/tasks")
-                    }
-                    )
-            }
-            )
-    }
 
     return (
         <form className="tasks__new-task">
@@ -133,68 +76,48 @@ export const UpdateTasks = () => {
                         required autoFocus
                         className="form-control"
                         placeholder="Enter Instructions..."
-                        rows={200}
-                        // cols={ }
-                        value={newTasks.instructions}
+                        style={{ height: "10rem" }}
+
+                        value={updates?.task?.instructions}
                         onChange={(evt) => {
-                            const copy = { ...newTasks }
-                            copy.instructions = evt.target.value
+                            const copy = { ...updates }
+                            copy.task.instructions = evt.target.value
                             setNewTasks(copy)
                         }
                         } />
                 </div>
             </fieldset>
 
-            <fieldset>
-                <div><h3>Choose a Team Member: </h3></div>
-                <select className="form-group"
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newTasks }
-                            copy.userId = evt.target.value
-                            setNewTasks(copy)
-                        }
-                    }>
-                    <option value={0}>Assign a Team Member</option>
-                    {users.map(
-                        (user) => {
-                            return <option
-                                name="location"
-                                className="form-control dropdown"
-                                value={user.id}
-                                key={`user--${user.id}`}
-                            >{user.fullName}</option>
-                        }
-                    )}
-                </select>
-            </fieldset>
 
-            <fieldset>
-                <div><h3>Choose a Task Type </h3></div>
-                <select className="form-group"
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newTasks }
-                            copy.typeId = evt.target.value
-                            setNewTasks(copy)
-                        }
-                    }>
-                    <option value={0}>Tasks...</option>
-                    {types.map(
-                        (type) => {
-                            return <option
-                                name="type"
-                                className="form-control dropdown"
-                                value={type.id}
-                                key={`type--${type.id}`}
-                            >{type.name}</option>
-                        }
-                    )}
-                </select>
-            </fieldset>
-
-            <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</button>
+            <button className="btn__new-task" onClick={(ClickEvent) => handleCreateNewTasks(ClickEvent)}>Update Task</button>
+            <button onClick={() => navigate("/tasks")}>Return to Task List</button>
         </form >
     )
 }
 
+
+/* 
+<fieldset>
+<div><h3>Update Team Member: </h3></div>
+<select className="form-group"
+    onChange={
+        (evt) => {
+            const copy = { ...newTasks }
+            copy.userId = evt.target.value
+            setNewTasks(copy)
+        }
+    }>
+    <option value={0}>Assign a Team Member</option>
+    {users.map(
+        (user) => {
+            return <option
+                name="location"
+                className="form-control dropdown"
+                value={user?.id}
+                key={`user--${user?.id}`}
+            >{user?.fullName}</option>
+        }
+    )}
+</select>
+</fieldset> 
+*/

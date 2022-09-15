@@ -35,7 +35,6 @@ export const TaskDetails = () => {
             <h4>Instructions</h4>
             <div className="done__assignment">{assignments.task.instructions} </div>
             <button onClick={() => navigate("/tasks")}>Return to Task List</button>
-            <button>Done</button>
         </section>
     </>
 }
