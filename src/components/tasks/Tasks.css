@@ -79,3 +79,9 @@
     padding: 1.5rem;
     width: fit-content;
 }
+
+.done__task--complete {
+    background-color: white;
+    text-align: center;
+    padding: 2%;
+}

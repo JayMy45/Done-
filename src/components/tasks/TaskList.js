@@ -1,14 +1,33 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import "./Tasks.css"
 
 export const TaskList = ({ }) => {
 
     const navigate = useNavigate()
+    const { taskId } = useParams()
 
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
-    const [completions, setCompletions] = useState(false)
+    const [buttonFilter, setButtonFilter] = useState(false)
+    const [updates, setUpdates] = useState({
+        completion: ""
+    })
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${taskId}`)
+                .then(response => response.json())
+                .then((data) => {
+                    const singleUpdate = data[0]
+                    setUpdates(singleUpdate)
+                })
+
+
+        },
+        [taskId]
+    )
+
 
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
@@ -25,6 +44,20 @@ export const TaskList = ({ }) => {
 
         },
         []
+    )
+
+    //?observe buttonFilter state
+    useEffect(
+        () => {
+            if (buttonFilter === true) {
+                const myFilteredTask = tasks.filter(task => task.userId === doneUserObject.id)
+                setFilteredTasks(myFilteredTask)
+            } else {
+                setFilteredTasks(tasks)
+            }
+
+        },
+        [buttonFilter]
     )
 
     //~ observes state of tasks and displays task according to login...
@@ -45,38 +78,29 @@ export const TaskList = ({ }) => {
 
     //! function runs when delete button is clicked...Deleting the task from API
     const deleteTaskButton = (task) => {
-        return fetch(`http://localhost:8088/tasks/${task.id}`, {
+        return fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${tasks.id}`, {
             method: "DELETE"
         })
             .then(() => {
-                fetch(`http://localhost:8088/tasks?_expand=type`) //go get all tickets
-                    .then(response => response.json()) //get response back from server
+                fetch(`http://localhost:8088/tasks?_expand=type`)
+                    .then(response => response.json())
                     .then((taskArray) => {
-                        setTasks(taskArray)  //setTickets is deconstructed above...a function...
+                        setTasks(taskArray)
                         navigate(`/tasks`)
                     })
             })
     }
 
     //isDone is a function that will be invoked within the code and handle the state of signalling a task as done.
-    const taskIsDone = () => {
-
-        if (tasks.id === doneUserObject.id && tasks.completion === false) {
-            return <button className="btn btn btn__done" onClick={closeTask}><strong>DONE<span>&#8253;</span></strong></button>
-        } else {
-            return ""
-        }
 
 
-    }
-
-    const closeTask = () => {
+    const closeTask = (event) => {
 
         const toBeSavedToAPI = {
-            userId: updates.userId,
+            userId: tasks.userId,
             completion: true,
-            instructions: updates.task.instructions,
-            typeId: updates.task.typeId
+            instructions: tasks.instructions,
+            typeId: tasks.typeId
         }
         return fetch(`http://localhost:8088/tasks/${taskId}`, {
             method: "PUT",
@@ -100,13 +124,14 @@ export const TaskList = ({ }) => {
                         doneUserObject.admin
                             ? <>
 
-                                <button className="btn btn__tasks" onClick={() => navigate("/tasks")}>All Tasks</button>
-                                <button className="btn btn__tasks" onClick={() => {
-                                    if (doneUserObject.id === filteredTasks.userId) {
-                                        const myTask = tasks.filter(task => doneUserObject.id === task.userId)
-                                        setFilteredTasks(myTask)
+                                <button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</button>
 
-                                    }
+                                <button className="btn btn__tasks" onClick={() => {
+
+                                    setButtonFilter(true)
+
+
+
                                 }}>My Tasks</button>
 
                             </>
@@ -149,12 +174,14 @@ export const TaskList = ({ }) => {
 
                                             }
                                         </>
-                                        <button className="btn btn btn__done" ><strong>DONE<span>&#8253;</span></strong></button>
+
+                                        {
+                                            task.completion
+                                                ? <div className="done__task--complete">Completed!</div>
+                                                : <button className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent)}><strong><em>un</em>DONE<span>&#8253;</span></strong></button>
+                                        }
                                     </div>
 
-                                    {
-                                        taskIsDone()
-                                    }
 
                                 </div>
                             </section>
