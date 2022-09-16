@@ -3,9 +3,9 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     border: 2px solid black;
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 15px;
-    margin: 2rem;
+    margin: 5rem;
 }
 
 .btn:hover {
@@ -23,7 +23,8 @@
 }
 
 .btn__create {
-    width: 200px;
+    width: 10rem;
+    /* margin-right: 5rem; */
 }
 
 .navbar__link {
@@ -57,7 +58,7 @@
 }
 
 .btn__ticketList {
-    height: 20%;
+
     margin: 1%;
 }
 
@@ -69,4 +70,12 @@
 .btn__delete {
     background-color: rgb(175, 109, 109);
     color: azure;
+}
+
+.btn__div {
+    display: flex;
+    flex-direction: row;
+    border: 2px dotted black;
+    padding: 1.5rem;
+    width: fit-content;
 }
