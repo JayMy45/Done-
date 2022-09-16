@@ -8,24 +8,26 @@ export const TaskList = ({ }) => {
 
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
+    const [completions, setCompletions] = useState(false)
 
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
 
-
+    //& initial tasks state set to task with expanded types and user from database
     useEffect(
         () => {
-            fetch(`http://localhost:8088/tasks?_expand=type&_expand=user`) //go get all tickets
-                .then(response => response.json()) //get response back from server
+            fetch(`http://localhost:8088/tasks?_expand=type&_expand=user`)
+                .then(response => response.json())
                 .then((taskArray) => {
-                    setTasks(taskArray)  //setTickets is deconstructed above...a function...
+                    setTasks(taskArray)
                 })
 
-            // console.log("Initial state of tickets", tickets) //view the initial state of tickets  (one is a string the other a parameter from deconstructed variable above)
+
         },
         []
-    ) // 
+    )
 
+    //~ observes state of tasks and displays task according to login...
     useEffect(
         () => {
             //employees
@@ -41,6 +43,7 @@ export const TaskList = ({ }) => {
         [tasks]
     )
 
+    //! function runs when delete button is clicked...Deleting the task from API
     const deleteTaskButton = (task) => {
         return fetch(`http://localhost:8088/tasks/${task.id}`, {
             method: "DELETE"
@@ -50,17 +53,67 @@ export const TaskList = ({ }) => {
                     .then(response => response.json()) //get response back from server
                     .then((taskArray) => {
                         setTasks(taskArray)  //setTickets is deconstructed above...a function...
+                        navigate(`/tasks`)
                     })
             })
     }
 
+    //isDone is a function that will be invoked within the code and handle the state of signalling a task as done.
+    const taskIsDone = () => {
+
+        if (tasks.id === doneUserObject.id && tasks.completion === false) {
+            return <button className="btn btn btn__done" onClick={closeTask}><strong>DONE<span>&#8253;</span></strong></button>
+        } else {
+            return ""
+        }
+
+
+    }
+
+    const closeTask = () => {
+
+        const toBeSavedToAPI = {
+            userId: updates.userId,
+            completion: true,
+            instructions: updates.task.instructions,
+            typeId: updates.task.typeId
+        }
+        return fetch(`http://localhost:8088/tasks/${taskId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(toBeSavedToAPI)
+        })
+            .then(response => response.json())
+            .then(() => {
+                navigate("/tasks")
+            })
+    }
 
 
     return <><h2>List of Tasks</h2>
         <section className="btn__btn--section">
             <div>
-                <button className="btn btn__tasks" onClick={() => navigate("/tasks/users")}>All Tasks</button>
-                <button className="btn btn__tasks">My Tasks</button>
+                <>
+                    {
+                        doneUserObject.admin
+                            ? <>
+
+                                <button className="btn btn__tasks" onClick={() => navigate("/tasks")}>All Tasks</button>
+                                <button className="btn btn__tasks" onClick={() => {
+                                    if (doneUserObject.id === filteredTasks.userId) {
+                                        const myTask = tasks.filter(task => doneUserObject.id === task.userId)
+                                        setFilteredTasks(myTask)
+
+                                    }
+                                }}>My Tasks</button>
+
+                            </>
+                            : <></>
+
+                    }
+                </>
             </div>
             <div className="btn__btn--div2">
                 <button className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create</button>
@@ -83,11 +136,25 @@ export const TaskList = ({ }) => {
                                     </fieldset>
 
                                     <Link className="navbar__link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
-                                    <button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
-                                    <button className="btn btn__ticketList btn__delete" onClick={() => deleteTaskButton(task)}>DELETE</button>
-                                    <button className="btn btn btn__done"><strong>DONE<span>&#8253;</span></strong></button>
+                                    <div className="btn__div">
+                                        <>
+                                            {
+                                                doneUserObject.admin
+                                                    ? <>
+                                                        <button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
+                                                        <button className="btn btn__ticketList btn__delete" onClick={() => deleteTaskButton(task)}>DELETE</button>
 
+                                                    </>
+                                                    : <></>
 
+                                            }
+                                        </>
+                                        <button className="btn btn btn__done" ><strong>DONE<span>&#8253;</span></strong></button>
+                                    </div>
+
+                                    {
+                                        taskIsDone()
+                                    }
 
                                 </div>
                             </section>
