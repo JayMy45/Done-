@@ -27,8 +27,6 @@ export const UpdateTasks = () => {
         [taskId]
     )
 
-    // TODO: Get employee profile info from API and update state
-
 
     const handleCreateNewTasks = (event) => {
         event.preventDefault()

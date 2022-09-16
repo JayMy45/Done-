@@ -4,7 +4,6 @@ import "./Tasks.css"
 
 export const TaskList = ({ }) => {
 
-    const navigate = useNavigate()
     const { taskId } = useParams()
 
     const [tasks, setTasks] = useState([])
@@ -14,6 +13,8 @@ export const TaskList = ({ }) => {
         completion: ""
     })
 
+    const navigate = useNavigate()
+
     useEffect(
         () => {
             fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${taskId}`)
@@ -22,13 +23,11 @@ export const TaskList = ({ }) => {
                     const singleUpdate = data[0]
                     setUpdates(singleUpdate)
                 })
-
-
         },
         [taskId]
     )
 
-
+    //get done_user object from local Storage
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
 
@@ -40,11 +39,10 @@ export const TaskList = ({ }) => {
                 .then((taskArray) => {
                     setTasks(taskArray)
                 })
-
-
         },
         []
     )
+
 
     //?observe buttonFilter state
     useEffect(
@@ -59,6 +57,7 @@ export const TaskList = ({ }) => {
         },
         [buttonFilter]
     )
+
 
     //~ observes state of tasks and displays task according to login...
     useEffect(
@@ -76,6 +75,7 @@ export const TaskList = ({ }) => {
         [tasks]
     )
 
+
     //! function runs when delete button is clicked...Deleting the task from API
     const deleteTaskButton = (task) => {
         return fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${tasks.id}`, {
@@ -91,9 +91,7 @@ export const TaskList = ({ }) => {
             })
     }
 
-    //isDone is a function that will be invoked within the code and handle the state of signalling a task as done.
-
-
+    //isDone is a function that will be invoked within the code and handle the state of signaling a task as done.
     const closeTask = (event) => {
 
         const toBeSavedToAPI = {
@@ -115,7 +113,6 @@ export const TaskList = ({ }) => {
             })
     }
 
-
     return <><h2>List of Tasks</h2>
         <section className="btn__btn--section">
             <div>
@@ -123,20 +120,9 @@ export const TaskList = ({ }) => {
                     {
                         doneUserObject.admin
                             ? <>
-
                                 <button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</button>
-
-                                <button className="btn btn__tasks" onClick={() => {
-
-                                    setButtonFilter(true)
-
-
-
-                                }}>My Tasks</button>
-
-                            </>
-                            : <></>
-
+                                <button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</button>
+                            </> : <></>
                     }
                 </>
             </div>
@@ -161,6 +147,7 @@ export const TaskList = ({ }) => {
                                     </fieldset>
 
                                     <Link className="navbar__link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
+
                                     <div className="btn__div">
                                         <>
                                             {
@@ -169,20 +156,15 @@ export const TaskList = ({ }) => {
                                                         <button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
                                                         <button className="btn btn__ticketList btn__delete" onClick={() => deleteTaskButton(task)}>DELETE</button>
 
-                                                    </>
-                                                    : <></>
-
+                                                    </> : <></>
                                             }
                                         </>
-
                                         {
                                             task.completion
                                                 ? <div className="done__task--complete">Completed!</div>
                                                 : <button className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent)}><strong><em>un</em>DONE<span>&#8253;</span></strong></button>
                                         }
                                     </div>
-
-
                                 </div>
                             </section>
                         }
