@@ -62,18 +62,20 @@ export const TaskList = ({ }) => {
 
 
     //! function runs when delete button is clicked...Deleting the task from API
-    const deleteTaskButton = (task) => {
-        return fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${tasks.id}`, {
+    const deleteTaskButton = (event, task) => {
+        return fetch(`http://localhost:8088/tasks/${task.id}`, {
             method: "DELETE"
         })
             .then(() => {
-                fetch(`http://localhost:8088/tasks?_expand=type`)
+                fetch(`http://localhost:8088/tasks?_expand=type&_expand=user`)
                     .then(response => response.json())
                     .then((taskArray) => {
                         setTasks(taskArray)
-                        navigate(`/tasks`)
                     })
-            })
+            },
+                []
+            )
+
     }
 
     //isDone is a function that will be invoked within the code and handle the state of signaling a task as done.
@@ -146,7 +148,7 @@ export const TaskList = ({ }) => {
                                                 doneUserObject.admin
                                                     ? <>
                                                         <button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
-                                                        <button className="btn btn__ticketList btn__delete" onClick={() => deleteTaskButton(task)}>DELETE</button>
+                                                        <button className="btn btn__ticketList btn__delete" onClick={(clickEvent) => deleteTaskButton(clickEvent, task)}>DELETE</button>
 
                                                     </> : <></>
                                             }
