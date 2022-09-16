@@ -8,7 +8,6 @@ export const UpdateTasks = () => {
     const { taskId } = useParams()
 
     // TODO: Provide initial state for profile
-
     const [updates, setUpdates] = useState({
         instructions: ""
     })

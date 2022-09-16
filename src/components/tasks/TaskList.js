@@ -4,28 +4,13 @@ import "./Tasks.css"
 
 export const TaskList = ({ }) => {
 
-    const { taskId } = useParams()
 
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
     const [buttonFilter, setButtonFilter] = useState(false)
-    const [updates, setUpdates] = useState({
-        completion: ""
-    })
 
     const navigate = useNavigate()
 
-    useEffect(
-        () => {
-            fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${taskId}`)
-                .then(response => response.json())
-                .then((data) => {
-                    const singleUpdate = data[0]
-                    setUpdates(singleUpdate)
-                })
-        },
-        [taskId]
-    )
 
     //get done_user object from local Storage
     const localDoneUser = localStorage.getItem("done_user")
@@ -92,15 +77,15 @@ export const TaskList = ({ }) => {
     }
 
     //isDone is a function that will be invoked within the code and handle the state of signaling a task as done.
-    const closeTask = (event) => {
+    const closeTask = (event, task) => {
 
         const toBeSavedToAPI = {
-            userId: tasks.userId,
+            userId: task.userId,
             completion: true,
-            instructions: tasks.instructions,
-            typeId: tasks.typeId
+            instructions: task.instructions,
+            typeId: task.typeId
         }
-        return fetch(`http://localhost:8088/tasks/${taskId}`, {
+        return fetch(`http://localhost:8088/tasks/${task.id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -109,8 +94,15 @@ export const TaskList = ({ }) => {
         })
             .then(response => response.json())
             .then(() => {
-                navigate("/tasks")
-            })
+                fetch(`http://localhost:8088/tasks?_expand=type&_expand=user`)
+                    .then(response => response.json())
+                    .then((taskArray) => {
+                        setTasks(taskArray)
+                    })
+            },
+                []
+            )
+
     }
 
     return <><h2>List of Tasks</h2>
@@ -162,7 +154,7 @@ export const TaskList = ({ }) => {
                                         {
                                             task.completion
                                                 ? <div className="done__task--complete">Completed!</div>
-                                                : <button className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent)}><strong><em>un</em>DONE<span>&#8253;</span></strong></button>
+                                                : <button className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent, task)}><strong><em>un</em>DONE<span>&#8253;</span></strong></button>
                                         }
                                     </div>
                                 </div>
