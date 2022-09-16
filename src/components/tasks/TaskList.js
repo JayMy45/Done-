@@ -1,14 +1,31 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import "./Tasks.css"
 
 export const TaskList = ({ }) => {
 
     const navigate = useNavigate()
+    const { taskId } = useParams()
 
     const [tasks, setTasks] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
-    const [completions, setCompletions] = useState(false)
+    const [updates, setUpdates] = useState({
+        completion: ""
+    })
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/assignments?_expand=user&_expand=task&taskId=${taskId}`)
+                .then(response => response.json())
+                .then((data) => {
+                    const singleUpdate = data[0]
+                    setUpdates(singleUpdate)
+                })
+
+
+        },
+        [taskId]
+    )
 
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
@@ -59,16 +76,8 @@ export const TaskList = ({ }) => {
     }
 
     //isDone is a function that will be invoked within the code and handle the state of signalling a task as done.
-    const taskIsDone = () => {
-
-        if (tasks.id === doneUserObject.id && tasks.completion === false) {
-            return <button className="btn btn btn__done" onClick={closeTask}><strong>DONE<span>&#8253;</span></strong></button>
-        } else {
-            return ""
-        }
 
 
-    }
 
     const closeTask = () => {
 
@@ -149,12 +158,14 @@ export const TaskList = ({ }) => {
 
                                             }
                                         </>
-                                        <button className="btn btn btn__done" ><strong>DONE<span>&#8253;</span></strong></button>
+
+                                        {
+                                            task.completion
+                                                ? ""
+                                                : <button className="btn btn btn__done" onClick={closeTask}><strong>DONE<span>&#8253;</span></strong></button>
+                                        }
                                     </div>
 
-                                    {
-                                        taskIsDone()
-                                    }
 
                                 </div>
                             </section>
