@@ -94,30 +94,3 @@ export const UpdateTasks = () => {
         </form >
     )
 }
-
-
-/* 
-<fieldset>
-<div><h3>Update Team Member: </h3></div>
-<select className="form-group"
-    onChange={
-        (evt) => {
-            const copy = { ...newTasks }
-            copy.userId = evt.target.value
-            setNewTasks(copy)
-        }
-    }>
-    <option value={0}>Assign a Team Member</option>
-    {users.map(
-        (user) => {
-            return <option
-                name="location"
-                className="form-control dropdown"
-                value={user?.id}
-                key={`user--${user?.id}`}
-            >{user?.fullName}</option>
-        }
-    )}
-</select>
-</fieldset> 
-*/
