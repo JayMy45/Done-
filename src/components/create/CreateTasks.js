@@ -13,7 +13,7 @@ export const CreateTasks = () => {
 
   useEffect(
     () => {
-      fetch(`http://localhost:8088/types`)
+      fetch(`http://localhost:8088/types?_sort=name`)
         .then(response => response.json())
         .then((typesArray) => {
           setTypes(typesArray)
@@ -26,7 +26,7 @@ export const CreateTasks = () => {
 
   useEffect(
     () => {
-      fetch(`http://localhost:8088/users`)
+      fetch(`http://localhost:8088/users?_sort=fullName`)
         .then(response => response.json())
         .then((usersArray) => {
           setUsers(usersArray)
@@ -40,35 +40,23 @@ export const CreateTasks = () => {
   // This module will create a new task by updating/POST to database directly
 
   /*
-    "assignments": [
+    assignments: [
       {
-        "id": 1,
-        "userId": 3,
-        "taskId": 1
-      },
-  
-      Tasks
+        id: int,
+        userId: int,
+        taskId: int
+      }
+    ],
+
+     tasks: [
       {
-        "id": 1,
-        "userId": 3,
-        "completion": false,
-        "instructions": "Rinse dishes after scrapping food and debris.  Then load dishwasher.  Use new pouches under the sink.  Be sure to wash my lunch bowl and Yeti cup.",
-        "typeId": 1
-      },
-  
-        "types": [
-      {
-        "id": 1,
-        "name": "Clean Kitchen",
-        "locationId": 2
-      },
-  "location"
-         {
-        "id": 1,
-        "location": "Bedroom"
-      },
-  
-  
+
+        userId: int,
+        completion: boolean,
+        instructions: "",
+        typeId: int
+      }
+    ]
   */
 
   //initial state of newTasks will provide the following information:
@@ -126,7 +114,7 @@ export const CreateTasks = () => {
 
   return (
     <form className="tasks__new-task">
-      <h2 className="task__form-title">Create New Tasks</h2>
+      <h2 className="task__form-title">Assign New Task</h2>
 
       <fieldset>
         <div className="form-group">

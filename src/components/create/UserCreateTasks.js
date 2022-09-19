@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "./Create.css"
 
 export const UserCreateTasks = () => {
 
@@ -13,7 +14,7 @@ export const UserCreateTasks = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/types`)
+            fetch(`http://localhost:8088/types?_sort=name`)
                 .then(response => response.json())
                 .then((typesArray) => {
                     setTypes(typesArray)
@@ -126,7 +127,25 @@ export const UserCreateTasks = () => {
 
     return (
         <form className="tasks__new-task">
-            <h2 className="task__form-title">Create New Tasks</h2>
+            <h2 className="task__form-title">Create A New Tasks</h2>
+
+            <div className="user__assigned">
+
+                <div>
+                    <h3 className="user__assigned--task">This Task has been Assigned To:</h3>
+                </div>
+
+                {
+
+                    users.map(
+                        (user) => {
+                            if (doneUserObject.id === user.id)
+                                return <h2 key={`user--${user.id}`}
+                                >{user.fullName}</h2>
+                        })
+
+                }
+            </div>
 
             <fieldset>
                 <div className="form-group">
@@ -146,19 +165,6 @@ export const UserCreateTasks = () => {
                         } />
                 </div>
             </fieldset>
-
-            <h3 className="user__assigned">Task Assigned To:</h3>
-
-            {
-
-                users.map(
-                    (user) => {
-                        if (doneUserObject.id === user.id)
-                            return <h2 key={`user--${user.id}`}
-                            >{user.fullName}</h2>
-                    })
-
-            }
 
             <fieldset>
                 <div><h3>Choose a Task Type </h3></div>

@@ -29,7 +29,7 @@ export const TaskList = () => {
     )
 
 
-    //?observe buttonFilter state
+    //? observe buttonFilter state
     useEffect(
         () => {
             if (buttonFilter === true) {
@@ -79,7 +79,7 @@ export const TaskList = () => {
 
     }
 
-    //isDone is a function that will be invoked within the code and handle the state of signaling a task as done.
+    //~ isDone is a function that will be invoked within the button code and handle the state of signaling a task as done.
     const closeTask = (event, task) => {
 
         const toBeSavedToAPI = {
@@ -109,6 +109,7 @@ export const TaskList = () => {
     }
 
     return <><h2>List of Tasks</h2>
+
         <section className="btn__btn--section">
             <div>
                 <>
@@ -121,6 +122,7 @@ export const TaskList = () => {
                     }
                 </>
             </div>
+
             <div className="btn__btn--div2">
                 <>
                     {
@@ -138,7 +140,7 @@ export const TaskList = () => {
 
         {
             <article className="tasks">
-                <h3>Task List</h3>
+                <h3></h3>
                 {
                     filteredTasks.map(
                         (task) => {

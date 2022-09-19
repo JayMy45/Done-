@@ -75,7 +75,8 @@
 .btn__div {
     display: flex;
     flex-direction: row;
-    border: 2px dotted black;
+    border: 2px solid black;
+    background-color: beige;
     padding: 1.5rem;
     width: fit-content;
 }

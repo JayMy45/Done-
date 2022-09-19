@@ -63,7 +63,7 @@ export const UpdateTasks = () => {
 
     return (
         <form className="tasks__new-task">
-            <h2 className="task__form-title">Create New Tasks</h2>
+            <h2 className="task__form-title">Update Tasks</h2>
 
             <fieldset>
                 <div className="form-group">
