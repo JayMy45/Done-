@@ -73,7 +73,7 @@ export const UserCreateTasks = () => {
 
     //initial state of newTasks will provide the following information:
     const [newTasks, setNewTasks] = useState({
-        userId: 0,
+        userId: doneUserObject.id,
         completion: false,
         instructions: "",
         typeId: 0
@@ -147,33 +147,18 @@ export const UserCreateTasks = () => {
                 </div>
             </fieldset>
 
-            <fieldset>
-                <div><h3>Choose a Team Member: </h3></div>
-                <select className="form-group"
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newTasks }
-                            copy.userId = evt.target.value
-                            setNewTasks(copy)
-                        }
-                    }>
-                    {
+            <h3 className="user__assigned">Task Assigned To:</h3>
 
+            {
 
-                    }
-                    <option value={0}>Assign a Team Member</option>
-                    {users.map(
-                        (user) => {
-                            return <option
-                                name="location"
-                                className="form-control dropdown"
-                                value={user.id}
-                                key={`user--${user.id}`}
-                            >{user.fullName}</option>
-                        }
-                    )}
-                </select>
-            </fieldset>
+                users.map(
+                    (user) => {
+                        if (doneUserObject.id === user.id)
+                            return <h2 key={`user--${user.id}`}
+                            >{user.fullName}</h2>
+                    })
+
+            }
 
             <fieldset>
                 <div><h3>Choose a Task Type </h3></div>
@@ -199,7 +184,7 @@ export const UserCreateTasks = () => {
                 </select>
             </fieldset>
 
-            <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</button>
+            <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent, users.id)}>Create New Task</button>
             <button onClick={() => navigate("/tasks")}>Return to Task List</button>
         </form >
     )
