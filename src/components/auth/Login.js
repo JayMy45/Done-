@@ -20,7 +20,7 @@ export const Login = () => {
                         admin: user.isAdmin
                     }))
 
-                    navigate("/")
+                    navigate("/tasks")
                 }
                 else {
                     window.alert("Invalid login")

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import "./Tasks.css"
 
-export const TaskList = ({ }) => {
+export const TaskList = () => {
 
 
     const [tasks, setTasks] = useState([])
