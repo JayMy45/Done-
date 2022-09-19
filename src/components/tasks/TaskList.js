@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Tasks.css"
 
 export const TaskList = ({ }) => {
@@ -16,7 +16,7 @@ export const TaskList = ({ }) => {
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
 
-    //& initial tasks state set to task with expanded types and user from database
+    //~ initial tasks state set to task with expanded types and user from database
     useEffect(
         () => {
             fetch(`http://localhost:8088/tasks?_expand=type&_expand=user`)
@@ -63,6 +63,7 @@ export const TaskList = ({ }) => {
 
     //! function runs when delete button is clicked...Deleting the task from API
     const deleteTaskButton = (event, task) => {
+        //needed to add task as a parameter (along with the clickEvent) in order to capture the task Object being chosen
         return fetch(`http://localhost:8088/tasks/${task.id}`, {
             method: "DELETE"
         })

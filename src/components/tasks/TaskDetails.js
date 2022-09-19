@@ -2,6 +2,11 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import "./Tasks.css"
 
+/*
+    This module will display instruction and/or descriptions of the task assigned. 
+    It will link to the current task link clicked to display the task details as mentioned above...
+*/
+
 export const TaskDetails = () => {
 
     const { taskId } = useParams()
@@ -23,12 +28,6 @@ export const TaskDetails = () => {
         },
         [taskId]
     )
-
-    //This module will display instruction and/or descriptions of the task assigned. 
-    //It will link to the current task link clicked to display the task details as mentioned above...
-
-
-
     return <>
         <section>
             <h2>Task Details</h2>

@@ -3,14 +3,14 @@ import { useNavigate, useParams } from "react-router-dom"
 
 export const UpdateTasks = () => {
 
-    const navigate = useNavigate()
-
     const { taskId } = useParams()
 
     // TODO: Provide initial state for profile
     const [updates, setUpdates] = useState({
         instructions: ""
     })
+
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -25,7 +25,6 @@ export const UpdateTasks = () => {
         },
         [taskId]
     )
-
 
     const handleCreateNewTasks = (event) => {
         event.preventDefault()
@@ -84,7 +83,6 @@ export const UpdateTasks = () => {
                         } />
                 </div>
             </fieldset>
-
 
             <button className="btn__new-task" onClick={(ClickEvent) => handleCreateNewTasks(ClickEvent)}>Update Task</button>
             <button onClick={() => navigate("/tasks")}>Return to Task List</button>

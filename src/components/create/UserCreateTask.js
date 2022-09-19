@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-export const UserCreateTasks = () => {
+export const CreateTasks = () => {
 
     const navigate = useNavigate()
 
     const [users, setUsers] = useState([])
     const [types, setTypes] = useState([])
-    console.log(users)
+
+    const localDoneUser = localStorage.getItem("done_user")
+    const doneUserObject = JSON.parse(localDoneUser)
 
     useEffect(
         () => {
@@ -77,7 +79,7 @@ export const UserCreateTasks = () => {
         typeId: 0
     })
 
-    console.log(newTasks)
+
     const createNewTasks = (event) => {
         event.preventDefault()
 
@@ -146,7 +148,7 @@ export const UserCreateTasks = () => {
             </fieldset>
 
             <fieldset>
-                <div><h3>New Task For {users.fullName} </h3></div>
+                <div><h3>Choose a Team Member: </h3></div>
                 <select className="form-group"
                     onChange={
                         (evt) => {
@@ -155,6 +157,10 @@ export const UserCreateTasks = () => {
                             setNewTasks(copy)
                         }
                     }>
+                    {
+
+
+                    }
                     <option value={0}>Assign a Team Member</option>
                     {users.map(
                         (user) => {
