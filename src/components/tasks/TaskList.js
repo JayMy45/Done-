@@ -122,7 +122,17 @@ export const TaskList = ({ }) => {
                 </>
             </div>
             <div className="btn__btn--div2">
-                <button className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create</button>
+                <>
+                    {
+                        doneUserObject.admin
+                            ? <>
+                                <button className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create</button>
+                            </> : <>
+                                <button className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</button>
+                            </>
+                    }
+                </>
+
             </div>
         </section>
 

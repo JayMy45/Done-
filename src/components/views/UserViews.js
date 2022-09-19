@@ -1,10 +1,8 @@
 import { Outlet, Route, Routes } from "react-router-dom"
-// import { UserTaskContainer } from "../tasks/UserTaskContainer"
 import { TaskDetails } from "../tasks/TaskDetails"
 import { UserLists } from "../users/UserLists"
-// import { UserCreateTasks } from "../create/UserCreateTask"
 import { TaskList } from "../tasks/TaskList"
-import { CreateTasks } from "../create/CreateTasks"
+import { UserCreateTasks } from "../create/UserCreateTasks"
 
 export const UserViews = () => {
     return (
@@ -19,7 +17,7 @@ export const UserViews = () => {
             }>
 
                 <Route path="tasks" element={<TaskList />} />
-                <Route path="tasks/create" element={<CreateTasks />} />
+                <Route path="tasks/user/create" element={<UserCreateTasks />} />
                 <Route path="tasks/:taskId" element={<TaskDetails />} />
                 <Route path="/tasks/users" element={<UserLists />} />
 
