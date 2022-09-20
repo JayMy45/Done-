@@ -6,8 +6,11 @@ export const TaskList = () => {
 
 
     const [tasks, setTasks] = useState([])
+    const [users, setUsers] = useState([])
     const [filteredTasks, setFilteredTasks] = useState([])
     const [buttonFilter, setButtonFilter] = useState(false)
+    const [completeButtonFilter, setCompleteButtonFilter] = useState(false)
+
 
     const navigate = useNavigate()
 
@@ -15,6 +18,20 @@ export const TaskList = () => {
     //get done_user object from local Storage
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
+
+
+    useEffect(
+        () => {
+            fetch(`http://localhost:8088/users?_sort=fullName`)
+                .then(response => response.json())
+                .then((usersArray) => {
+                    setUsers(usersArray)
+                })
+
+
+        },
+        []
+    )
 
     //~ initial tasks state set to task with expanded types and user from database
     useEffect(
@@ -44,6 +61,41 @@ export const TaskList = () => {
     )
 
 
+    //* observe completeButtonFilter state
+    useEffect(
+        () => {
+            if (completeButtonFilter === true) {
+                const myFilteredTask = tasks.filter(task => task.completion === true)
+                setFilteredTasks(myFilteredTask)
+            } else {
+                setFilteredTasks(tasks)
+            }
+
+        },
+        [completeButtonFilter]
+    )
+
+    const unCheckButton = () => {
+
+        if (completeButtonFilter === true && doneUserObject.admin === true) {
+            setCompleteButtonFilter(false)
+        } else if (completeButtonFilter === false && doneUserObject.admin === true) {
+            setCompleteButtonFilter(true)
+        }
+    }
+    const unCheckUserButton = () => {
+
+        if (!doneUserObject.admin && completeButtonFilter === false) {
+            const myCompleteButtonFilterTask = tasks.filter(task => task.completion === doneUserObject.id)
+            setCompleteButtonFilter(true)
+        } else if (!doneUserObject.admin && completeButtonFilter === true) {
+            const myCompleteButtonFilterTask = tasks.filter(task => task.completion === doneUserObject.id)
+            setCompleteButtonFilter(false)
+        }
+    }
+
+
+
     //~ observes state of tasks and displays task according to login...
     useEffect(
         () => {
@@ -53,7 +105,7 @@ export const TaskList = () => {
 
             } else {
                 //customers
-                const myTasks = tasks.filter(task => task.userId === doneUserObject.id)
+                const myTasks = tasks.filter(task => task.userId === doneUserObject.id || task.userId === 0)
                 setFilteredTasks(myTasks)
             }
         },
@@ -111,7 +163,7 @@ export const TaskList = () => {
     return <><h2>List of Tasks</h2>
 
         <section className="btn__btn--section">
-            <div>
+            <div className="btn__btn--section1">
                 <>
                     {
                         doneUserObject.admin
@@ -122,38 +174,62 @@ export const TaskList = () => {
                     }
                 </>
             </div>
-
             <div className="btn__btn--div2">
                 <>
                     {
                         doneUserObject.admin
                             ? <>
-                                <button className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create</button>
+                                <button className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create New Task</button>
+                                <button className="btn btn__create--type" onClick={() => navigate("/type/create")}>Create Type</button>
                             </> : <>
                                 <button className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</button>
                             </>
                     }
                 </>
-
             </div>
         </section>
-
+        <section>
+            <div className="user__dropdown">
+                <>
+                    {
+                        <>
+                            <fieldset>
+                                {
+                                    doneUserObject.admin
+                                        ? <div>
+                                            <label>
+                                                <input
+                                                    type="checkbox"
+                                                    checked={completeButtonFilter}
+                                                    onChange={unCheckButton} />
+                                                Completed
+                                            </label>
+                                        </div>
+                                        : <></>
+                                }
+                            </fieldset>
+                        </>
+                    }
+                </>
+            </div>
+        </section>
         {
             <article className="tasks">
-                <h3></h3>
                 {
                     filteredTasks.map(
                         (task) => {
                             return <section className="task" key={`task--${task.id}`}>
                                 <div className="task__manager">
-                                    <fieldset>
+                                    <fieldset className="task__manage--userName">
                                         <div className="task__user-assigned"><header><strong>Assigned to:</strong></header></div>
                                         <div className="task__user-fullName">
                                             <footer>{task?.user?.fullName}</footer>
                                         </div>
                                     </fieldset>
-
-                                    <Link className="navbar__link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
+                                    <div className="user__detail">
+                                        <h4>click link for details:</h4>
+                                        <Link className="user__detail--link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
+                                    </div>
 
                                     <div className="btn__div">
                                         <>
@@ -171,9 +247,11 @@ export const TaskList = () => {
                                                 ? <div className="done__task--complete">Completed!</div>
                                                 : <button className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent, task)}><strong><em>un</em>DONE<span>&#8253;</span></strong></button>
                                         }
+
                                     </div>
                                 </div>
                             </section>
+
                         }
                     )
                 }
@@ -182,3 +260,26 @@ export const TaskList = () => {
     </>
 }
 
+
+
+{/* <div><h3>Jump To: </h3></div>
+<select className="form-group"
+    onChange={(evt) => {
+        if (evt.target.value === tasks.userId) {
+            const myFilteredJumpToTask = tasks.filter(task => task.userId === evt.target.value)
+            setFilteredTasks(myFilteredJumpToTask)
+        }
+    }}
+>
+    <option value={0}>Choose a Team Member</option>
+    {users.map(
+        (user) => {
+            return <option
+                name="location"
+                className="form-control dropdown"
+                value={user.id}
+                key={`user--${user.id}`}
+            >{user.fullName}</option>
+        }
+    )}
+</select> */}

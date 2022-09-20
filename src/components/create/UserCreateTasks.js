@@ -136,14 +136,12 @@ export const UserCreateTasks = () => {
                 </div>
 
                 {
-
                     users.map(
                         (user) => {
                             if (doneUserObject.id === user.id)
                                 return <h2 key={`user--${user.id}`}
                                 >{user.fullName}</h2>
                         })
-
                 }
             </div>
 
