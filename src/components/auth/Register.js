@@ -86,7 +86,7 @@ export const Register = (props) => {
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Register </button>
-                    <button type="submit" onClick={() => navigate("/")}> Back to Login </button>
+                    <button type="button" onClick={() => navigate("/")}> Back to Login </button>
                 </fieldset>
             </form>
         </main>

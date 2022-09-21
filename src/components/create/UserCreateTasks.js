@@ -189,7 +189,7 @@ export const UserCreateTasks = () => {
             </fieldset>
 
             <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent, users.id)}>Create New Task</button>
-            <button onClick={() => navigate("/tasks")}>Return to Task List</button>
+            <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
         </form >
     )
 }
