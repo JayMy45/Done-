@@ -13,21 +13,16 @@ export const UserNav = () => {
 
                     <Navbar.Brand href="/">DONE<span>&#8253;</span></Navbar.Brand>
 
+                    <Nav className="mr__right">
+                        <Nav.Link href="/tasks">Tasks</Nav.Link>
+                    </Nav>
+                    <Nav className="mr__left">
+                        <Nav.Link href="" onClick={() => {
+                            localStorage.removeItem("done_user")
+                            navigate("/", { replace: true })
+                        }}>Logout</Nav.Link>
 
-                    <Navbar.Toggle />
-                    <Navbar.Collapse>
-                        <Nav className="mr__right">
-                            <Nav.Link href="/tasks">Tasks</Nav.Link>
-                        </Nav>
-                        <Nav className="mr__left">
-                            <Nav.Link href="" onClick={() => {
-                                localStorage.removeItem("done_user")
-                                navigate("/", { replace: true })
-                            }}>Logout</Nav.Link>
-
-                        </Nav>
-                    </Navbar.Collapse>
-
+                    </Nav>
 
                 </Container>
             </Navbar>

@@ -1,16 +1,19 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
+import { AdminNav } from "./AdminNav"
 import "./NavBar.css"
+import { UserNav } from "./UserNav"
 
 export const NavBar = () => {
-
     const navigate = useNavigate()
 
-    //get done_user object from local Storage
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
 
-    doneUserObject.admin
-        ? <AdminNav />
-        : <UserNav />
+    if (doneUserObject.admin) {
+        return <AdminNav />
+    } else {
+        return <UserNav />
+    }
+
 }
