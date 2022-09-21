@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import "./Tasks.css"
+// import "./Tasks.css"
+import Button from 'react-bootstrap/Button';
+
 
 export const TaskList = () => {
 
@@ -168,8 +170,8 @@ export const TaskList = () => {
                     {
                         doneUserObject.admin
                             ? <>
-                                <button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</button>
-                                <button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</button>
+                                <Button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</Button>
+                                <Button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</Button>
                             </> : <></>
                     }
                 </>
@@ -179,10 +181,10 @@ export const TaskList = () => {
                     {
                         doneUserObject.admin
                             ? <>
-                                <button className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create New Task</button>
-                                <button className="btn btn__create--type" onClick={() => navigate("/type/create")}>Create Type</button>
+                                <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create New Task</Button>
+                                <Button variant="dark" className="btn btn__create--type" onClick={() => navigate("/type/create")}>Create Type</Button>
                             </> : <>
-                                <button className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</button>
+                                <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</Button>
                             </>
                     }
                 </>
@@ -236,8 +238,8 @@ export const TaskList = () => {
                                             {
                                                 doneUserObject.admin
                                                     ? <>
-                                                        <button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</button>
-                                                        <button className="btn btn__ticketList btn__delete" onClick={(clickEvent) => deleteTaskButton(clickEvent, task)}>DELETE</button>
+                                                        <Button variant="primary" size="sm" className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</Button>
+                                                        <Button variant="danger" size="sm" className="btn btn__ticketList btn__delete" onClick={(clickEvent) => deleteTaskButton(clickEvent, task)}>DELETE</Button>
 
                                                     </> : <></>
                                             }
@@ -245,7 +247,7 @@ export const TaskList = () => {
                                         {
                                             task.completion
                                                 ? <div className="done__task--complete">Completed!</div>
-                                                : <button className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent, task)}><strong><em>un</em>DONE<span>&#8253;</span></strong></button>
+                                                : <Button variant="success" className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent, task)}><strong><em>un</em>DONE<span>&#8253;</span></strong></Button>
                                         }
 
                                     </div>

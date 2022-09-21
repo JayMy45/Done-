@@ -45,7 +45,7 @@ export const UpdateTasks = () => {
         })
             .then(response => response.json())
             .then(() => {
-                navigate("/tasks")
+                navigate(`/tasks/${taskId}`)
             })
 
         /*
@@ -85,6 +85,7 @@ export const UpdateTasks = () => {
             </fieldset>
 
             <button className="btn__new-task" onClick={(ClickEvent) => handleCreateNewTasks(ClickEvent)}>Update Task</button>
+            <button onClick={() => navigate(`/tasks/${taskId}`)}>Return to Task Details</button>
             <button onClick={() => navigate("/tasks")}>Return to Task List</button>
         </form >
     )

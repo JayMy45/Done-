@@ -1,4 +1,4 @@
-.task__manager {
+/* .task__manager {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -32,7 +32,6 @@
 
 .btn__create {
     width: 10rem;
-    /* margin-right: 5rem; */
 }
 
 .navbar__link {
@@ -52,7 +51,6 @@
     border-top: 1px solid black;
     border-bottom: 1px solid black;
     padding: .5rem;
-    /* border-radius: 15px; */
     background-color: beige;
     margin-top: 5%;
 }
@@ -94,8 +92,6 @@
 .done__task--complete {
     background-color: white;
     text-align: center;
-    /* padding: 10%; */
-    /* border: 1px dashed black; */
     margin: auto;
 }
 
@@ -110,4 +106,4 @@
 
 .task__manage--userName {
     border: 1px solid black;
-}
+} */

@@ -3,6 +3,15 @@ import { createRoot } from "react-dom/client"
 import "./index.css"
 import { BrowserRouter } from "react-router-dom"
 
+/*
+React Bootstrap Configurations
+ */
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import '../node_modules/react-bootstrap@next/dist/react-bootstrap.min.js'
+
+
+
 const container = document.getElementById("root")
 const root = createRoot(container)
 root.render(

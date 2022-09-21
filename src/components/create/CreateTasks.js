@@ -8,8 +8,7 @@ export const CreateTasks = () => {
   const [users, setUsers] = useState([])
   const [types, setTypes] = useState([])
 
-  const localDoneUser = localStorage.getItem("done_user")
-  const doneUserObject = JSON.parse(localDoneUser)
+
 
   useEffect(
     () => {

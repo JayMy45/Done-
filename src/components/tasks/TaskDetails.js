@@ -36,7 +36,6 @@ export const TaskDetails = () => {
             <h4>Instructions</h4>
             <div className="done__assignment">{assignments.task.instructions} </div>
             <button onClick={() => navigate("/tasks")}>Return to Task List</button>
-            <button onClick={() => navigate(`/tasks/${taskId}`)}>Return to Task Details</button>
             {
                 doneUserObject.admin
                     ? <button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${taskId}`)}>UPDATE</button>
