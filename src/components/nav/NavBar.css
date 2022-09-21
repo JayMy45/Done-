@@ -13,3 +13,11 @@
     margin-left: auto;
 }
  */
+
+.mr__left {
+    margin-left: auto;
+}
+
+.mr__right {
+    margin-right: auto;
+}
