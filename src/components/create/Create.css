@@ -8,3 +8,11 @@
     font-size: small;
     border-bottom: 1px solid rebeccapurple;
 } */
+
+#type__container {
+    place-items: center center;
+}
+
+#type__form {
+    max-width: 330px;
+}

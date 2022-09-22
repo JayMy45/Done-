@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Form from "react-bootstrap/Form"
+import Container from "react-bootstrap/Container"
+import Button from "react-bootstrap/Button"
 import "./Create.css"
 
 export const UserCreateTasks = () => {
@@ -126,71 +129,72 @@ export const UserCreateTasks = () => {
     }
 
     return (
-        <form className="tasks__new-task">
-            <h2 className="task__form-title">Create A New Tasks</h2>
+        <Container id="task__container">
+            < Form className="tasks__new-task" >
+                <h2 className="task__form-title mb-3 text-center">Create A New Tasks</h2>
 
-            <div className="user__assigned">
+                <div className="user__assigned">
 
-                <div>
-                    <h3 className="user__assigned--task">This Task has been Assigned To:</h3>
+                    <div>
+                        <Form.Label className="user__assigned--task mb-1">Assigned To:</Form.Label>
+                    </div>
+
+                    {
+                        users.map(
+                            (user) => {
+                                if (doneUserObject.id === user.id)
+                                    return <Form.Label className="mb-4 fs-1" key={`user--${user.id}`}
+                                    >{user.fullName}</Form.Label>
+                            })
+                    }
                 </div>
-
-                {
-                    users.map(
-                        (user) => {
-                            if (doneUserObject.id === user.id)
-                                return <h2 key={`user--${user.id}`}
-                                >{user.fullName}</h2>
-                        })
-                }
-            </div>
-
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="instructions"><strong>Enter Instructions Here:</strong></label>
-                    <textarea
-                        required autoFocus
-                        type="text"
-                        style={{ height: "10rem" }}
-                        className="form-control"
-                        placeholder="Enter Instructions..."
-                        value={newTasks.instructions}
-                        onChange={(evt) => {
-                            const copy = { ...newTasks }
-                            copy.instructions = evt.target.value
-                            setNewTasks(copy)
-                        }
-                        } />
-                </div>
-            </fieldset>
-
-            <fieldset>
-                <div><h3>Choose a Task Type </h3></div>
-                <select className="form-group"
-                    onChange={
-                        (evt) => {
-                            const copy = { ...newTasks }
-                            copy.typeId = evt.target.value
-                            setNewTasks(copy)
-                        }
-                    }>
-                    <option value={0}>Tasks...</option>
-                    {types.map(
-                        (type) => {
-                            return <option
-                                name="type"
-                                className="form-control dropdown"
-                                value={type.id}
-                                key={`type--${type.id}`}
-                            >{type.name}</option>
-                        }
-                    )}
-                </select>
-            </fieldset>
-
-            <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent, users.id)}>Create New Task</button>
-            <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
-        </form >
+                <Form.Group>
+                    <div className="form-group">
+                        <Form.Label >Enter Instructions Here:></Form.Label>
+                        <Form.Control
+                            as="textarea"
+                            required autoFocus
+                            style={{ height: "10rem" }}
+                            className="form-control mb-4"
+                            placeholder="Enter Instructions..."
+                            value={newTasks.instructions}
+                            onChange={(evt) => {
+                                const copy = { ...newTasks }
+                                copy.instructions = evt.target.value
+                                setNewTasks(copy)
+                            }
+                            } />
+                    </div>
+                </Form.Group>
+                <Form.Group>
+                    <fieldset>
+                        <Form.Label>Choose a Task Type </Form.Label>
+                        <Form.Select className="form-group mb-3"
+                            onChange={
+                                (evt) => {
+                                    const copy = { ...newTasks }
+                                    copy.typeId = evt.target.value
+                                    setNewTasks(copy)
+                                }
+                            }>
+                            <option value={0}>Tasks...</option>
+                            {types.map(
+                                (type) => {
+                                    return <option
+                                        name="type"
+                                        className="form-control dropdown"
+                                        value={type.id}
+                                        key={`type--${type.id}`}
+                                    >{type.name}</option>
+                                }
+                            )}
+                        </Form.Select>
+                    </fieldset>
+                </Form.Group>
+                <div className="mb-2 d-grid"><Button className="btn__new-task" variant="success" onClick={(ClickEvent) => createNewTasks(ClickEvent, users.id)}>Assign New Task</Button></div>
+                <div className="d-grid"><Button type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button></div>
+            </Form >
+        </Container >
     )
 }
 

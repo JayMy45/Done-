@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom"
 React Bootstrap Configurations
  */
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 // import '../node_modules/react-bootstrap@next/dist/react-bootstrap.min.js'
 
 
