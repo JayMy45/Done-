@@ -138,19 +138,20 @@ export const UserCreateTasks = () => {
                     <div>
                         <Form.Label className="user__assigned--task mb-1">Assigned To:</Form.Label>
                     </div>
-
-                    {
-                        users.map(
-                            (user) => {
-                                if (doneUserObject.id === user.id)
-                                    return <Form.Label className="mb-4 fs-1" key={`user--${user.id}`}
-                                    >{user.fullName}</Form.Label>
-                            })
-                    }
+                    <Form.Group>
+                        {
+                            users.map(
+                                (user) => {
+                                    if (doneUserObject.id === user.id)
+                                        return <Form.Label className="mb-4 fs-1" key={`user--${user.id}`}
+                                        ><strong>{user.fullName}</strong></Form.Label>
+                                })
+                        }
+                    </Form.Group>
                 </div>
                 <Form.Group>
                     <div className="form-group">
-                        <Form.Label >Enter Instructions Here:></Form.Label>
+                        <Form.Label >Enter Instructions Below:</Form.Label>
                         <Form.Control
                             as="textarea"
                             required autoFocus

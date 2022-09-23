@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
+import "./Create.css"
 
 
 export const CreateTaskTypes = () => {
@@ -75,7 +76,7 @@ export const CreateTaskTypes = () => {
     }
 
     return (
-        <Container id="type__container" className="d-grid h-100">
+        <Container id="type__container" className="d-grid h-75 jumbotron">
 
             <Form id="type__form" className="tasks__new-task w-100" noValidate>
                 <h2 className="task__form-title text-center mb-3 fs-2">Create a New Task Type</h2>

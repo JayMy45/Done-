@@ -1,6 +1,9 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom"
+import Form from "react-bootstrap/Form"
+import Container from "react-bootstrap/Container"
+import Button from "react-bootstrap/Button"
 import "./Login.css"
 
 export const Login = () => {
@@ -30,30 +33,37 @@ export const Login = () => {
 
     return (
         <main className="container--login">
-            <section>
-                <form className="form--login" onSubmit={handleLogin}>
+
+            <Container >
+                <Form className="form--login mb-3" onSubmit={handleLogin}>
                     <h1>DONE<span>&#8253;</span></h1>
                     <h2>Please sign in</h2>
-                    <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input type="email"
-                            value={email}
-                            onChange={evt => set(evt.target.value)}
-                            className="form-control"
-                            placeholder="Email address"
-                            required autoFocus />
-                    </fieldset>
-                    <fieldset>
-                        <button type="submit">
-                            Sign in
-                        </button>
-                    </fieldset>
-                </form>
-            </section>
-            <section className="link--register">
-                <Link to="/register">Not a member yet?</Link>
-            </section>
-        </main>
+                    <div className="jumbotron">
+                        <Form.Group className="mb-3">
+                            <Form.Label htmlFor="inputEmail"> Email address </Form.Label>
+                            <Form.Control type="email"
+                                value={email}
+                                onChange={evt => set(evt.target.value)}
+                                className="form-control"
+                                placeholder="Email address"
+                                required autoFocus />
+                        </Form.Group>
+
+
+                        <Form.Group className="mb-3">
+                            <Button variant='success' type="submit">
+                                Sign in
+                            </Button>
+                        </Form.Group>
+
+                        <section className="link--register">
+                            <Link to="/register">Not a member yet?</Link>
+                        </section>
+                    </div>
+                </Form>
+            </Container>
+
+        </main >
     )
 }
 

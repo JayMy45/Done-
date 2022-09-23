@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Form from "react-bootstrap/Form"
+import Container from "react-bootstrap/Container"
+import Button from "react-bootstrap/Button"
+import "./Create.css"
 
 export const CreateTasks = () => {
 
@@ -112,83 +116,92 @@ export const CreateTasks = () => {
   }
 
   return (
-    <form className="tasks__new-task">
-      <h2 className="task__form-title">Assign New Task</h2>
+    <Container className="d-grid h-75 jumbotron">
+      <Form className="tasks__new-task w-100">
+        <h2 className="task__form-title">Assign New Task</h2>
 
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="instructions"><strong>Enter Instructions Here:</strong></label>
-          <textarea
-            required autoFocus
-            type="text"
-            style={{ height: "10rem" }}
-            className="form-control"
-            placeholder="Enter Instructions..."
-            value={newTasks.instructions}
-            onChange={(evt) => {
-              const copy = { ...newTasks }
-              copy.instructions = evt.target.value
-              setNewTasks(copy)
-            }
-            } />
+        <Form.Group className="mb-3">
+          <fieldset>
+            <div className="form-group">
+              <Form.Label htmlFor="instructions"><strong>Enter Instructions Here:</strong></Form.Label>
+              <Form.Control
+                required
+                autoFocus
+                as="textarea"
+                style={{ height: "10rem" }}
+                className="form-control"
+                placeholder="Enter Instructions..."
+                value={newTasks.instructions}
+                onChange={(evt) => {
+                  const copy = { ...newTasks }
+                  copy.instructions = evt.target.value
+                  setNewTasks(copy)
+                }
+                } />
+            </div>
+          </fieldset>
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <fieldset>
+            <div><Form.Label>Choose a Team Member: </Form.Label></div>
+            <Form.Select> className="form-group"
+              onChange={
+                (evt) => {
+                  const copy = { ...newTasks }
+                  copy.userId = evt.target.value
+                  setNewTasks(copy)
+                }
+              }
+              {
+
+
+              }
+              <option value={0}>Assign a Team Member</option>
+              {users.map(
+                (user) => {
+                  return <option
+                    name="location"
+                    className="form-control dropdown"
+                    value={user.id}
+                    key={`user--${user.id}`}
+                  >{user.fullName}</option>
+                }
+              )}
+            </Form.Select>
+          </fieldset>
+        </Form.Group>
+
+        <fieldset>
+          <Form.Group className="mb-3">
+            <div><Form.Label>Choose a Task Type </Form.Label></div>
+            <Form.Select> className="form-group"
+              onChange={
+                (evt) => {
+                  const copy = { ...newTasks }
+                  copy.typeId = evt.target.value
+                  setNewTasks(copy)
+                }
+              }
+              <option value={0}>Tasks...</option>
+              {types.map(
+                (type) => {
+                  return <option
+                    name="type"
+                    className="form-control dropdown"
+                    value={type.id}
+                    key={`type--${type.id}`}
+                  >{type.name}</option>
+                }
+              )}
+            </Form.Select>
+          </Form.Group>
+        </fieldset>
+        <div className="btn__btn-new">
+          <Button className="btn__new-task " variant="success" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</Button>
+          <Button className="ml-1" type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button>
         </div>
-      </fieldset>
-
-      <fieldset>
-        <div><h3>Choose a Team Member: </h3></div>
-        <select className="form-group"
-          onChange={
-            (evt) => {
-              const copy = { ...newTasks }
-              copy.userId = evt.target.value
-              setNewTasks(copy)
-            }
-          }>
-          {
-
-
-          }
-          <option value={0}>Assign a Team Member</option>
-          {users.map(
-            (user) => {
-              return <option
-                name="location"
-                className="form-control dropdown"
-                value={user.id}
-                key={`user--${user.id}`}
-              >{user.fullName}</option>
-            }
-          )}
-        </select>
-      </fieldset>
-
-      <fieldset>
-        <div><h3>Choose a Task Type </h3></div>
-        <select className="form-group"
-          onChange={
-            (evt) => {
-              const copy = { ...newTasks }
-              copy.typeId = evt.target.value
-              setNewTasks(copy)
-            }
-          }>
-          <option value={0}>Tasks...</option>
-          {types.map(
-            (type) => {
-              return <option
-                name="type"
-                className="form-control dropdown"
-                value={type.id}
-                key={`type--${type.id}`}
-              >{type.name}</option>
-            }
-          )}
-        </select>
-      </fieldset>
-
-      <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</button>
-      <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
-    </form >
+      </Form >
+    </Container >
   )
 }
 
