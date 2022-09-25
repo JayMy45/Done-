@@ -1,5 +1,8 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import Form from "react-bootstrap/Form"
+import Container from "react-bootstrap/Container"
+import Button from "react-bootstrap/Button"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -55,40 +58,46 @@ export const Register = (props) => {
 
     return (
         <main style={{ textAlign: "center" }}>
-            <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Please Register for DONE<span>&#8253;</span></h1>
-                <fieldset>
-                    <label htmlFor="fullName"> Full Name </label>
-                    <input onChange={updateCustomer}
-                        type="text" id="fullName" className="form-control"
-                        placeholder="Enter your name" required autoFocus />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="email"> Email address </label>
-                    <input onChange={updateCustomer}
-                        type="email" id="email" className="form-control"
-                        placeholder="Email address" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="phoneNumber"> Phone Number </label>
-                    <input onChange={updateCustomer}
-                        type="tel" id="phoneNumber" className="form-control"
-                        placeholder="Phone Number" maxLength={10} required />
-                </fieldset>
-                <fieldset>
-                    <input onChange={(evt) => {
-                        const copy = { ...customer }
-                        copy.isAdmin = evt.target.checked
-                        setCustomer(copy)
-                    }}
-                        type="checkbox" id="isAdmin" />
-                    <label htmlFor="email"> I am a Parent </label>
-                </fieldset>
-                <fieldset>
-                    <button type="submit"> Register </button>
-                    <button type="button" onClick={() => navigate("/")}> Back to Login </button>
-                </fieldset>
-            </form>
+            <Container id="" className="d-grid h-100">
+                <Form className="form--login tasks__new-task w-100  jumbotron" id="type__form" onSubmit={handleRegister}>
+                    <h1 className="h3 mb-3 font-weight-normal">Please Register for DONE<span>&#8253;</span></h1>
+                    <Form.Group>
+                        <fieldset>
+                            <div>
+                                <Form.Label htmlFor="fullName"> Full Name </Form.Label>
+                                <Form.Control onChange={updateCustomer}
+                                    type="text" id="fullName" className="form-control"
+                                    placeholder="Enter your name" required autoFocus />
+                            </div>
+                        </fieldset>
+                    </Form.Group>
+                    <fieldset>
+                        <label htmlFor="email"> Email address </label>
+                        <input onChange={updateCustomer}
+                            type="email" id="email" className="form-control"
+                            placeholder="Email address" required />
+                    </fieldset>
+                    <fieldset>
+                        <label htmlFor="phoneNumber"> Phone Number </label>
+                        <input onChange={updateCustomer}
+                            type="tel" id="phoneNumber" className="form-control"
+                            placeholder="Phone Number" maxLength={10} required />
+                    </fieldset>
+                    <fieldset>
+                        <input onChange={(evt) => {
+                            const copy = { ...customer }
+                            copy.isAdmin = evt.target.checked
+                            setCustomer(copy)
+                        }}
+                            type="checkbox" id="isAdmin" />
+                        <label htmlFor="email"> I am a Parent </label>
+                    </fieldset>
+                    <fieldset>
+                        <button type="submit"> Register </button>
+                        <button type="button" onClick={() => navigate("/")}> Back to Login </button>
+                    </fieldset>
+                </Form>
+            </Container>
         </main>
     )
 }

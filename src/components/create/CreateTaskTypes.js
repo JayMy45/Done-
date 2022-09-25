@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom"
 import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import logoAdminLg from "/Users/jeremymyers/workspace/done-capstone/src/doneAdmin.lg.png"
 import "./Create.css"
+import { Stack } from "react-bootstrap"
 
 
 export const CreateTaskTypes = () => {
@@ -76,56 +80,71 @@ export const CreateTaskTypes = () => {
     }
 
     return (
-        <Container id="type__container" className="d-grid h-75 jumbotron">
+        <Container id="type__container" className="d-grid h-25">
 
-            <Form id="type__form" className="tasks__new-task w-100" noValidate>
-                <h2 className="task__form-title text-center mb-3 fs-2">Create a New Task Type</h2>
-                <Form.Group controlId="type-name-input">
-                    <div className="form-group">
-                        <Form.Label><strong>Name Task Type:</strong></Form.Label>
+            <Form id="type__form" className="tasks__new-task w-100  jumbotron" noValidate>
+                <Row>
+                    <h2 className="task__form-title text-center mb-3 fs-3">Create a New Task Type</h2>
+                    <Col lg={6}>
+                        <Form.Group controlId="type-name-input">
+                            <div className="form-group">
+                                <Form.Label><strong>Name Task Type:</strong></Form.Label>
 
-                        <Form.Control
-                            required
-                            type="text"
-                            className="form-control mb-2"
-                            placeholder="Type Name"
-                            value={newTypes.name}
-                            onChange={(evt) => {
-                                const copy = { ...newTypes }
-                                copy.name = evt.target.value
-                                setNewTypes(copy)
-                            }
-                            } />
-                    </div>
-                </Form.Group>
-                <Form.Group controlId="assign-location-dropdown">
-                    <Form.Label><strong>Choose a Location:</strong></Form.Label>
-                    <Form.Select className="form-group mb-3"
-                        onChange={
-                            (evt) => {
-                                const copy = { ...newTypes }
-                                copy.locationId = evt.target.value
-                                setNewTypes(copy)
-                            }
-                        }>
-                        <option value={0}>Assign a Location</option>
-                        {locations.map(
-                            (location) => {
-                                return <option
-                                    name="location"
-                                    className="form-control dropdown"
-                                    value={location.id}
-                                    key={`locations--${location.id}`}
-                                >{location.location}</option>
-                            }
-                        )}
-                    </Form.Select>
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    className="form-control mb-2"
+                                    placeholder="Type Name"
+                                    value={newTypes.name}
+                                    onChange={(evt) => {
+                                        const copy = { ...newTypes }
+                                        copy.name = evt.target.value
+                                        setNewTypes(copy)
+                                    }
+                                    } />
+                            </div>
+                        </Form.Group>
 
-                </Form.Group>
-                <div className="d-grid mb-2"><Button variant="success" type="submit" className="btn__new-task" onClick={(ClickEvent) => createNewTaskType(ClickEvent)}>Create New Task</Button></div>
-                <div className="d-grid"><Button type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button></div>
+                        <Form.Group controlId="assign-location-dropdown">
+                            <Form.Label><strong>Choose a Location:</strong></Form.Label>
+                            <Form.Select className="form-group mb-3"
+                                onChange={
+                                    (evt) => {
+                                        const copy = { ...newTypes }
+                                        copy.locationId = evt.target.value
+                                        setNewTypes(copy)
+                                    }
+                                }>
+                                <option value={0}>Assign a Location</option>
+                                {locations.map(
+                                    (location) => {
+                                        return <option
+                                            name="location"
+                                            className="form-control dropdown"
+                                            value={location.id}
+                                            key={`locations--${location.id}`}
+                                        >{location.location}</option>
+                                    }
+                                )}
+                            </Form.Select>
+
+                        </Form.Group>
+                        <div className="d-grid mb-2"><Button variant="success" type="submit" className="btn__new-task" onClick={(ClickEvent) => createNewTaskType(ClickEvent)}>Create New Task</Button></div>
+                        <div className="d-grid"><Button type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button></div>
+
+                    </Col>
+                    <Col lg={6} >
+                        <Form.Group>
+                            <img src={logoAdminLg} className="img__admin-lg mb-1" width="320" alt="Done Logo" />
+                        </Form.Group>
+                    </Col>
+                </Row>
             </Form >
-
+            <Container>
+                <Form.Label className="powered__by-bottom">
+                    <h6 className="powered-by">asdf</h6>
+                </Form.Label>
+            </Container>
         </Container>
     )
 }

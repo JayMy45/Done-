@@ -21,3 +21,8 @@
 .mr__right {
     margin-right: auto;
 }
+
+.admin-text {
+    color: red;
+    font-size: small;
+}

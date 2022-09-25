@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
 
 export const UpdateTasks = () => {
 
@@ -62,31 +64,33 @@ export const UpdateTasks = () => {
     })
 
     return (
-        <form className="tasks__new-task">
-            <h2 className="task__form-title">Update Tasks</h2>
+        <Container>
+            <form className="tasks__new-task">
+                <h2 className="task__form-title">Update Tasks</h2>
 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="instructions"><strong>Enter Instructions Here:</strong></label>
-                    <textarea
-                        required autoFocus
-                        className="form-control"
-                        placeholder="Enter Instructions..."
-                        style={{ height: "10rem" }}
+                <fieldset>
+                    <div className="form-group">
+                        <label htmlFor="instructions"><strong>Enter Instructions Here:</strong></label>
+                        <textarea
+                            required autoFocus
+                            className="form-control"
+                            placeholder="Enter Instructions..."
+                            style={{ height: "10rem" }}
 
-                        value={updates?.task?.instructions}
-                        onChange={(evt) => {
-                            const copy = { ...updates }
-                            copy.task.instructions = evt.target.value
-                            setNewTasks(copy)
-                        }
-                        } />
-                </div>
-            </fieldset>
+                            value={updates?.task?.instructions}
+                            onChange={(evt) => {
+                                const copy = { ...updates }
+                                copy.task.instructions = evt.target.value
+                                setNewTasks(copy)
+                            }
+                            } />
+                    </div>
+                </fieldset>
 
-            <button className="btn__new-task" onClick={(ClickEvent) => handleCreateNewTasks(ClickEvent)}>Update Task</button>
-            <button type="button" onClick={() => navigate(`/tasks/${taskId}`)}>Return to Task Details</button>
-            <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
-        </form >
+                <button className="btn__new-task" onClick={(ClickEvent) => handleCreateNewTasks(ClickEvent)}>Update Task</button>
+                <button type="button" onClick={() => navigate(`/tasks/${taskId}`)}>Return to Task Details</button>
+                <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
+            </form >
+        </Container>
     )
 }

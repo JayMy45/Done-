@@ -61,9 +61,25 @@ fieldset {
 }
  */
 
-.jumbotron {
+/* .jumbotron {
     padding: 2rem 1rem;
     margin-bottom: 2rem;
     background-color: #e9ecef;
     border-radius: .3rem;
+} */
+
+#type__container {
+    place-items: center center;
+}
+
+#type__form {
+    max-width: 600px;
+}
+
+.jumbotron {
+    padding: 2rem;
+    background-color: #e9ecef;
+    border-radius: 15px;
+    width: 600px;
+
 }

@@ -4,14 +4,16 @@ import { TaskDetails } from "../tasks/TaskDetails"
 import { TaskList } from "../tasks/TaskList"
 import { UserCreateTasks } from "../create/UserCreateTasks"
 import { User } from "../users/User"
+import userLogo from "/Users/jeremymyers/workspace/done-capstone/src/Done.dark.png"
 
 export const UserViews = () => {
     return (
         <Routes>
             <Route path="/" element={
                 <>
-                    <h1>DONE<span>&#8253;</span></h1>
-                    <div>Get Er' DONE<span>&#8253;</span></div>
+
+                    <img src={userLogo} width="300" alt="Done Logo" />
+
 
                     <Outlet />
                 </>

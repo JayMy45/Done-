@@ -2,6 +2,9 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 // import "./Tasks.css"
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+
 
 
 export const TaskList = () => {
@@ -162,104 +165,108 @@ export const TaskList = () => {
 
     }
 
-    return <><h2>List of Tasks</h2>
+    return <Container>
+        <Form>
+            <><h2>List of Tasks</h2>
 
-        <section className="btn__btn--section">
-            <div className="btn__btn--section1">
-                <>
-                    {
-                        doneUserObject.admin
-                            ? <>
-                                <Button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</Button>
-                                <Button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</Button>
-                            </> : <></>
-                    }
-                </>
-            </div>
-            <div className="btn__btn--div2">
-                <>
-                    {
-                        doneUserObject.admin
-                            ? <>
-                                <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create New Task</Button>
-                                <Button variant="dark" className="btn btn__create--type" onClick={() => navigate("/type/create")}>Create Type</Button>
-                            </> : <>
-                                <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</Button>
-                            </>
-                    }
-                </>
-            </div>
-        </section>
-        <section>
-            <div className="user__dropdown">
-                <>
-                    {
+                <section className="btn__btn--section mb-3">
+                    <div className="btn__btn--section1 ">
                         <>
-                            <fieldset>
-                                {
-                                    doneUserObject.admin
-                                        ? <div>
-                                            <label>
-                                                <input
-                                                    type="checkbox"
-                                                    checked={completeButtonFilter}
-                                                    onChange={unCheckButton} />
-                                                Completed
-                                            </label>
-                                        </div>
-                                        : <></>
-                                }
-                            </fieldset>
+                            {
+                                doneUserObject.admin
+                                    ? <>
+                                        <Button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</Button>
+                                        <Button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</Button>
+                                    </> : <></>
+                            }
                         </>
-                    }
-                </>
-            </div>
-        </section>
-        {
-            <article className="tasks">
-                {
-                    filteredTasks.map(
-                        (task) => {
-                            return <section className="task" key={`task--${task.id}`}>
-                                <div className="task__manager">
-                                    <fieldset className="task__manage--userName">
-                                        <div className="task__user-assigned"><header><strong>Assigned to:</strong></header></div>
-                                        <div className="task__user-fullName">
-                                            <footer>{task?.user?.fullName}</footer>
-                                        </div>
-                                    </fieldset>
-                                    <div className="user__detail">
-                                        <h4>click link for details:</h4>
-                                        <Link className="user__detail--link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
-                                    </div>
-
-                                    <div className="btn__div">
-                                        <>
-                                            {
-                                                doneUserObject.admin
-                                                    ? <>
-                                                        <Button variant="primary" size="sm" className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</Button>
-                                                        <Button variant="danger" size="sm" className="btn btn__ticketList btn__delete" onClick={(clickEvent) => deleteTaskButton(clickEvent, task)}>DELETE</Button>
-
-                                                    </> : <></>
-                                            }
-                                        </>
+                    </div>
+                    <div className="btn__btn--div2">
+                        <>
+                            {
+                                doneUserObject.admin
+                                    ? <>
+                                        <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create New Task</Button>
+                                        <Button variant="dark" className="btn btn__create--type" onClick={() => navigate("/type/create")}>Create Type</Button>
+                                    </> : <>
+                                        <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</Button>
+                                    </>
+                            }
+                        </>
+                    </div>
+                </section>
+                <section>
+                    <div className="user__dropdown">
+                        <>
+                            {
+                                <>
+                                    <fieldset>
                                         {
-                                            task.completion
-                                                ? <div className="done__task--complete">Completed!</div>
-                                                : <Button variant="success" className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent, task)}><strong><em>un</em>DONE<span>&#8253;</span></strong></Button>
+                                            doneUserObject.admin
+                                                ? <div>
+
+                                                    <Form.Check
+                                                        type="switch"
+                                                        checked={completeButtonFilter}
+                                                        onChange={unCheckButton}
+                                                        label="Completed" />
+
+                                                </div>
+                                                : <></>
                                         }
+                                    </fieldset>
+                                </>
+                            }
+                        </>
+                    </div>
+                </section>
+                {
+                    <article className="tasks">
+                        {
+                            filteredTasks.map(
+                                (task) => {
+                                    return <section className="task" key={`task--${task.id}`}>
+                                        <div className="task__manager">
+                                            <fieldset className="task__manage--userName">
+                                                <div className="task__user-assigned"><header><strong>Assigned to:</strong></header></div>
+                                                <div className="task__user-fullName">
+                                                    <footer>{task?.user?.fullName}</footer>
+                                                </div>
+                                            </fieldset>
+                                            <div className="user__detail">
+                                                <h4>click link for details:</h4>
+                                                <Link className="user__detail--link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
+                                            </div>
 
-                                    </div>
-                                </div>
-                            </section>
+                                            <div className="btn__div">
+                                                <>
+                                                    {
+                                                        doneUserObject.admin
+                                                            ? <>
+                                                                <Button variant="primary" size="sm" className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</Button>
+                                                                <Button variant="danger" size="sm" className="btn btn__ticketList btn__delete" onClick={(clickEvent) => deleteTaskButton(clickEvent, task)}>DELETE</Button>
 
+                                                            </> : <></>
+                                                    }
+                                                </>
+                                                {
+                                                    task.completion
+                                                        ? <div className="done__task--complete">Completed!</div>
+                                                        : <Button variant="success" className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent, task)}><strong><em>un</em>DONE<span>&#8253;</span></strong></Button>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                }
+                            )
                         }
-                    )
+                    </article >
                 }
-            </article >
-        }
-    </>
+            </>
+        </Form>
+    </Container>
 }
 
 

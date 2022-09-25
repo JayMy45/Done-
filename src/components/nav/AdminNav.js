@@ -1,5 +1,8 @@
-import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import Navbar from "react-bootstrap/Navbar"
+import NavDropdown from "react-bootstrap/NavDropdown"
+import Nav from "react-bootstrap/Nav"
+import Container from "react-bootstrap/Container"
 import "./NavBar.css"
 
 export const AdminNav = () => {
@@ -9,10 +12,11 @@ export const AdminNav = () => {
 
     return (
         <>
-            <Navbar bg="dark" expand="sm" variant="dark">
+            <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
-
-                    <Navbar.Brand href="/">DONE<span>&#8253;</span></Navbar.Brand>
+                    <Navbar.Brand href="/">
+                        DONE<span>&#8253;</span> <span className="admin-text">Admin</span>
+                    </Navbar.Brand>
 
 
                     <Navbar.Toggle />

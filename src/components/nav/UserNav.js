@@ -19,6 +19,7 @@ export const UserNav = () => {
                     <Navbar.Collapse>
                         <Nav className="mr__right">
                             <Nav.Link href="/tasks">Tasks</Nav.Link>
+                            <Nav.Link href="/tasks/user/create">Create</Nav.Link>
                         </Nav>
                         <Nav className="mr__left">
                             <Nav.Link href="" onClick={() => {

@@ -14,7 +14,7 @@
 }
 
 #type__form {
-    max-width: 330px;
+    max-width: 600px;
 }
 
 Button:hover {
@@ -26,4 +26,16 @@ Button:hover {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.jumbotron {
+    padding: 2rem;
+    background-color: #e9ecef;
+    border-radius: 15px;
+
+}
+
+.powered-by {
+    margin-top: 300%;
+    text-align: center;
 }
