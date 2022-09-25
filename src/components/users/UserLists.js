@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { User } from "./User"
+
 
 export const UserLists = () => {
 
@@ -11,7 +13,7 @@ export const UserLists = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/users`) //go get all tickets
+            fetch(`http://localhost:8088/users?_sort=fullName`) //go get all tickets
                 .then(response => response.json()) //get response back from server
                 .then((userArray) => {
                     setUsers(userArray)  //setTickets is deconstructed above...a function...
@@ -21,31 +23,17 @@ export const UserLists = () => {
         },
         []
     )
-    return <>
+    console.log(users)
+    return <article className="user">
+
         {
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="doneUser">Product type:</label>
-                    <select id="doneUser" value={users.id}
-
-                        onChange={(evt) => {
-                            const copy = { ...users }
-                            copy.productTypeId = evt.target.value
-                            setUsers(copy)
-                        }}
-                    >
-                        <option value={0}>Please choose a type...</option>
-                        {
-                            users.map(user => {
-                                return <option value={user.id}>{user.fullName}</option>
-                            })
-                        }
-                    </select>
-
-                </div>
-            </fieldset>
-
+            users.map((user) => <User key={`user--${user.id}`}
+                id={user.id}
+                fullName={user?.fullName}
+                email={user.email} />)
         }
-    </>
+
+
+    </article>
 
 }

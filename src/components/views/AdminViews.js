@@ -1,18 +1,27 @@
 import { Outlet, Route, Routes } from "react-router-dom"
 import { CreateTasks } from "../create/CreateTasks"
+import { CreateTaskTypes } from "../create/CreateTaskTypes"
 import { DeleteTasks } from "../tasks/DeleteTask"
 import { TaskDetails } from "../tasks/TaskDetails"
 import { TaskList } from "../tasks/TaskList"
 import { UpdateTasks } from "../update/UpdateTasks"
 import { UserLists } from "../users/UserLists"
+import smLogo from "/Users/jeremymyers/workspace/done-capstone/src/doneAdmin.sm.png"
+
+// import logo from "/Users/jeremymyers/workspace/done-capstone/src/doneAdmin.lg.png"
+
 
 export const AdminViews = () => {
     return (
         <Routes>
             <Route path="/" element={
                 <>
-                    <h1>DONE<span>&#8253;</span></h1>
-                    <div>Get Er' DONE<span>&#8253;</span></div>
+                    {
+
+                    }
+                    <img src={smLogo} width="300" alt="Done Logo" />
+                    {/* <img src={logo} width="500" alt="Done Logo" /> */}
+
 
                     <Outlet />
                 </>
@@ -23,7 +32,8 @@ export const AdminViews = () => {
                 <Route path="tasks/delete" element={<DeleteTasks />} />
                 <Route path="tasks/update/:taskId" element={<UpdateTasks />} />
                 <Route path="tasks/:taskId" element={<TaskDetails />} />
-                <Route path="/tasks/users" element={<UserLists />} />
+                <Route path="type/create" element={<CreateTaskTypes />} />
+                <Route path="tasks/users" element={<UserLists />} />
 
 
             </Route>

@@ -1,9 +1,9 @@
 .task__manager {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     flex-wrap: wrap;
     border: 2px solid black;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 15px;
     margin: 5rem;
 }
@@ -19,12 +19,19 @@
 
 .btn__btn--section {
     display: flex;
+    flex-direction: row;
+    border-bottom: 1px dashed black;
     justify-content: space-between;
+    padding-bottom: 1rem;
+}
+
+.btn__btn--section1 {
+    display: flex;
+    flex-direction: row;
 }
 
 .btn__create {
     width: 10rem;
-    /* margin-right: 5rem; */
 }
 
 .navbar__link {
@@ -41,10 +48,11 @@
 }
 
 .task__user-fullName {
-    border: 1px dotted orange;
-    padding: 1rem;
-    border-radius: 30px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: .5rem;
     background-color: beige;
+    margin-top: 5%;
 }
 
 .task__user-assigned {
@@ -58,7 +66,6 @@
 }
 
 .btn__ticketList {
-
     margin: 1%;
 }
 
@@ -75,7 +82,9 @@
 .btn__div {
     display: flex;
     flex-direction: row;
-    border: 2px dotted black;
+    border: 2px solid black;
+    background-color: beige;
+    border-radius: 15px;
     padding: 1.5rem;
     width: fit-content;
 }
@@ -83,5 +92,18 @@
 .done__task--complete {
     background-color: white;
     text-align: center;
-    padding: 2%;
+    margin: auto;
+}
+
+.user__detail--link {
+    font-size: large;
+    text-align: center;
+}
+
+.user__detail {
+    text-align: center;
+}
+
+.task__manage--userName {
+    border: 1px solid black;
 }

@@ -1,25 +1,19 @@
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { Link, useNavigate } from "react-router-dom"
+import { AdminNav } from "./AdminNav"
 import "./NavBar.css"
+import { UserNav } from "./UserNav"
 
 export const NavBar = () => {
     const navigate = useNavigate()
 
-    return (
-        <ul className="navbar">
-            <li className="navbar__item active">
-                <Link className="navbar__link" to="/tasks">Tasks</Link>
-            </li>
-            {
-                localStorage.getItem("done_user")
-                    ? <li className="navbar__item navbar__logout">
-                        <Link className="navbar__link" to="" onClick={() => {
-                            localStorage.removeItem("done_user")
-                            navigate("/", { replace: true })
-                        }}>Logout</Link>
-                    </li>
-                    : ""
-            }
-        </ul>
-    )
-}
+    const localDoneUser = localStorage.getItem("done_user")
+    const doneUserObject = JSON.parse(localDoneUser)
 
+    if (doneUserObject.admin) {
+        return <AdminNav />
+    } else {
+        return <UserNav />
+    }
+
+}

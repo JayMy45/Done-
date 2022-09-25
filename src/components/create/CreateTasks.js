@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react"
+import { Container, Form } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+
+
 
 export const CreateTasks = () => {
 
@@ -8,12 +11,11 @@ export const CreateTasks = () => {
   const [users, setUsers] = useState([])
   const [types, setTypes] = useState([])
 
-  const localDoneUser = localStorage.getItem("done_user")
-  const doneUserObject = JSON.parse(localDoneUser)
+
 
   useEffect(
     () => {
-      fetch(`http://localhost:8088/types`)
+      fetch(`http://localhost:8088/types?_sort=name`)
         .then(response => response.json())
         .then((typesArray) => {
           setTypes(typesArray)
@@ -26,7 +28,7 @@ export const CreateTasks = () => {
 
   useEffect(
     () => {
-      fetch(`http://localhost:8088/users`)
+      fetch(`http://localhost:8088/users?_sort=fullName`)
         .then(response => response.json())
         .then((usersArray) => {
           setUsers(usersArray)
@@ -40,35 +42,23 @@ export const CreateTasks = () => {
   // This module will create a new task by updating/POST to database directly
 
   /*
-    "assignments": [
+    assignments: [
       {
-        "id": 1,
-        "userId": 3,
-        "taskId": 1
-      },
-  
-      Tasks
+        id: int,
+        userId: int,
+        taskId: int
+      }
+    ],
+
+     tasks: [
       {
-        "id": 1,
-        "userId": 3,
-        "completion": false,
-        "instructions": "Rinse dishes after scrapping food and debris.  Then load dishwasher.  Use new pouches under the sink.  Be sure to wash my lunch bowl and Yeti cup.",
-        "typeId": 1
-      },
-  
-        "types": [
-      {
-        "id": 1,
-        "name": "Clean Kitchen",
-        "locationId": 2
-      },
-  "location"
-         {
-        "id": 1,
-        "location": "Bedroom"
-      },
-  
-  
+
+        userId: int,
+        completion: boolean,
+        instructions: "",
+        typeId: int
+      }
+    ]
   */
 
   //initial state of newTasks will provide the following information:
@@ -125,83 +115,87 @@ export const CreateTasks = () => {
   }
 
   return (
-    <form className="tasks__new-task">
-      <h2 className="task__form-title">Create New Tasks</h2>
+    <Container>
+      <Form className="tasks__new-task">
+        <h2 className="task__form-title">Assign New Task</h2>
+        <Form.Group>
+          <fieldset>
+            <div className="form-group">
+              <Form.Label htmlFor="instructions"><strong>Enter Instructions Here:</strong></Form.Label>
+              <Form.Control
+                required autoFocus
+                as="textarea"
+                style={{ height: "10rem" }}
+                className="form-control"
+                placeholder="Enter Instructions..."
+                value={newTasks.instructions}
+                onChange={(evt) => {
+                  const copy = { ...newTasks }
+                  copy.instructions = evt.target.value
+                  setNewTasks(copy)
+                }
+                } />
+            </div>
+          </fieldset>
+        </Form.Group>
+        <Form.Group>
 
-      <fieldset>
-        <div className="form-group">
-          <label htmlFor="instructions"><strong>Enter Instructions Here:</strong></label>
-          <textarea
-            required autoFocus
-            type="text"
-            style={{ height: "10rem" }}
-            className="form-control"
-            placeholder="Enter Instructions..."
-            value={newTasks.instructions}
-            onChange={(evt) => {
-              const copy = { ...newTasks }
-              copy.instructions = evt.target.value
-              setNewTasks(copy)
+          <div><h3>Choose a Team Member: </h3></div>
+          <Form.Select className="form-group"
+            onChange={
+              (evt) => {
+                const copy = { ...newTasks }
+                copy.userId = evt.target.value
+                setNewTasks(copy)
+              }
+            }>
+            {
+
+
             }
-            } />
-        </div>
-      </fieldset>
+            <option value={0}>Assign a Team Member</option>
+            {users.map(
+              (user) => {
+                return <option
+                  name="location"
+                  className="form-control dropdown"
+                  value={user.id}
+                  key={`user--${user.id}`}
+                >{user.fullName}</option>
+              }
+            )}
+          </Form.Select>
 
-      <fieldset>
-        <div><h3>Choose a Team Member: </h3></div>
-        <select className="form-group"
-          onChange={
-            (evt) => {
-              const copy = { ...newTasks }
-              copy.userId = evt.target.value
-              setNewTasks(copy)
-            }
-          }>
-          {
+        </Form.Group>
+        <Form.Group>
 
+          <div><h3>Choose a Task Type </h3></div>
+          <Form.Select className="form-group"
+            onChange={
+              (evt) => {
+                const copy = { ...newTasks }
+                copy.typeId = evt.target.value
+                setNewTasks(copy)
+              }
+            }>
+            <option value={0}>Tasks...</option>
+            {types.map(
+              (type) => {
+                return <option
+                  name="type"
+                  className="form-control dropdown"
+                  value={type.id}
+                  key={`type--${type.id}`}
+                >{type.name}</option>
+              }
+            )}
+          </Form.Select>
 
-          }
-          <option value={0}>Assign a Team Member</option>
-          {users.map(
-            (user) => {
-              return <option
-                name="location"
-                className="form-control dropdown"
-                value={user.id}
-                key={`user--${user.id}`}
-              >{user.fullName}</option>
-            }
-          )}
-        </select>
-      </fieldset>
-
-      <fieldset>
-        <div><h3>Choose a Task Type </h3></div>
-        <select className="form-group"
-          onChange={
-            (evt) => {
-              const copy = { ...newTasks }
-              copy.typeId = evt.target.value
-              setNewTasks(copy)
-            }
-          }>
-          <option value={0}>Tasks...</option>
-          {types.map(
-            (type) => {
-              return <option
-                name="type"
-                className="form-control dropdown"
-                value={type.id}
-                key={`type--${type.id}`}
-              >{type.name}</option>
-            }
-          )}
-        </select>
-      </fieldset>
-
-      <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</button>
-      <button onClick={() => navigate("/tasks")}>Return to Task List</button>
-    </form >
+        </Form.Group>
+        <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</button>
+        <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
+      </Form >
+    </Container>
   )
 }
 

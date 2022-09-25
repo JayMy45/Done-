@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
     display: flex;
     flex-wrap: nowrap;
     justify-content: left;
@@ -12,4 +12,17 @@
 .navbar__logout {
     margin-left: auto;
 }
+ */
 
+.mr__left {
+    margin-left: auto;
+}
+
+.mr__right {
+    margin-right: auto;
+}
+
+.admin-text {
+    color: red;
+    font-size: small;
+}

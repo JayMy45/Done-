@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import "./Tasks.css"
+
 
 /*
     This module will display instruction and/or descriptions of the task assigned. 
@@ -13,6 +17,8 @@ export const TaskDetails = () => {
     const [assignments, updateAssignments] = useState({
         task: "",
     })
+    const localDoneUser = localStorage.getItem("done_user")
+    const doneUserObject = JSON.parse(localDoneUser)
 
     const navigate = useNavigate()
 
@@ -29,11 +35,18 @@ export const TaskDetails = () => {
         [taskId]
     )
     return <>
-        <section>
-            <h2>Task Details</h2>
-            <h4>Instructions</h4>
-            <div className="done__assignment">{assignments.task.instructions} </div>
-            <button onClick={() => navigate("/tasks")}>Return to Task List</button>
-        </section>
+        <Container>
+            <section>
+                <h2 className="mb-3"> Task Details</h2>
+                <Form.Label>Instructions</Form.Label>
+                <div className="done__assignment">{assignments.task.instructions} </div>
+                <Button onClick={() => navigate("/tasks")}>Return to Task List</Button>
+                {
+                    doneUserObject.admin
+                        ? <Button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${taskId}`)}>UPDATE</Button>
+                        : <></>
+                }
+            </section>
+        </Container>
     </>
 }
