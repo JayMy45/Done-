@@ -15,7 +15,7 @@ export const AdminNav = () => {
             <Navbar bg="dark" expand="lg" variant="dark">
                 <Container>
                     <Navbar.Brand href="/">
-                        DONE<span>&#8253;</span> <span className="admin-text">Admin</span>
+                        <span id="done__text-Nav">DONE<span>&#8253;</span></span> <span className="admin-text">Admin</span>
                     </Navbar.Brand>
 
 

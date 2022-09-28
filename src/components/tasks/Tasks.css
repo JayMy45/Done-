@@ -41,10 +41,12 @@
 }
 
 .done__assignment {
-    border: 2px dotted goldenrod;
+    border: 2px dashed goldenrod;
     margin-bottom: 2%;
     border-radius: 15px;
-    padding: 2%;
+    background-color: white;
+    padding: 5%;
+    box-shadow: inset 2px 2px 8px 0px #000000;
 }
 
 .task__user-fullName {

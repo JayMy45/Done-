@@ -38,12 +38,12 @@ export const TaskDetails = () => {
         <Container>
             <section>
                 <h2 className="mb-3"> Task Details</h2>
-                <Form.Label>Instructions</Form.Label>
+                <Form.Label>Instructions: </Form.Label>
                 <div className="done__assignment">{assignments.task.instructions} </div>
-                <Button onClick={() => navigate("/tasks")}>Return to Task List</Button>
+                <Button className="w-25" variant="secondary" onClick={() => navigate("/tasks")}>Task List</Button>
                 {
                     doneUserObject.admin
-                        ? <Button className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${taskId}`)}>UPDATE</Button>
+                        ? <Button className="btn btn__ticketList btn__update w-25" onClick={() => navigate(`/tasks/update/${taskId}`)}>UPDATE</Button>
                         : <></>
                 }
             </section>

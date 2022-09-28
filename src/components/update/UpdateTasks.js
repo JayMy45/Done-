@@ -2,6 +2,11 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import poweredByDone from "/Users/jeremymyers/workspace/done-capstone/src/PoweredbyDone.admin.png"
+import "./Update.css"
 
 export const UpdateTasks = () => {
 
@@ -64,33 +69,55 @@ export const UpdateTasks = () => {
     })
 
     return (
-        <Container>
-            <form className="tasks__new-task">
-                <h2 className="task__form-title">Update Tasks</h2>
+        <Container id="type__container" className="d-grid h-25 w-50">
+            <Form className="tasks__new-task jumbotron">
+                <Row>
+                    <h2 id="done__update-task" className="task__form-title mb-3">Update Tasks</h2>
 
-                <fieldset>
-                    <div className="form-group">
-                        <label htmlFor="instructions"><strong>Enter Instructions Here:</strong></label>
-                        <textarea
-                            required autoFocus
-                            className="form-control"
-                            placeholder="Enter Instructions..."
-                            style={{ height: "10rem" }}
 
-                            value={updates?.task?.instructions}
-                            onChange={(evt) => {
-                                const copy = { ...updates }
-                                copy.task.instructions = evt.target.value
-                                setNewTasks(copy)
-                            }
-                            } />
-                    </div>
-                </fieldset>
+                    <Form.Group>
+                        <div className="form-group mb-4">
+                            <Form.Label htmlFor="instructions"><strong>Update Instructions Here:</strong></Form.Label>
+                            <Form.Control
+                                required autoFocus
+                                as="textarea"
+                                className="form-control mb-3"
+                                placeholder="Enter Instructions..."
+                                style={{ height: "10rem" }}
 
-                <button className="btn__new-task" onClick={(ClickEvent) => handleCreateNewTasks(ClickEvent)}>Update Task</button>
-                <button type="button" onClick={() => navigate(`/tasks/${taskId}`)}>Return to Task Details</button>
-                <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
-            </form >
-        </Container>
+                                value={updates?.task?.instructions}
+                                onChange={(evt) => {
+                                    const copy = { ...updates }
+                                    copy.task.instructions = evt.target.value
+                                    setNewTasks(copy)
+                                }
+                                } />
+                        </div>
+                    </Form.Group>
+                    <Row>
+                        <Col>
+                            <Button className="btn__new-task w-100" onClick={(ClickEvent) => handleCreateNewTasks(ClickEvent)}>Update Task</Button>
+                        </Col>
+
+                        <Col>
+                            <Button type="button" variant="dark" className="w-100" onClick={() => navigate(`/tasks/${taskId}`)}>Details</Button>
+                        </Col>
+
+                        <Col>
+                            <Button type="button" variant="secondary" className="w-100" onClick={() => navigate("/tasks")}>Task List</Button>
+                        </Col>
+
+                    </Row>
+                </Row>
+            </Form >
+            <Row>
+                <Form.Label className="powered__by-bottom">
+                    <h6 className="powered-by">Powered by  <img src={poweredByDone} className="" width="55" height="50" alt="Powered By Done Logo" /></h6>
+
+                </Form.Label>
+
+            </Row>
+
+        </Container >
     )
 }
