@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 import "./Login.css"
 
 export const Register = (props) => {
@@ -57,48 +59,57 @@ export const Register = (props) => {
     }
 
     return (
-        <main style={{ textAlign: "center" }}>
-            <Container id="" className="d-grid h-100">
+        <main>
+            <Container id="type__container" className="d-grid h-25 w-50">
                 <Form className="form--login tasks__new-task w-100  jumbotron" id="type__form" onSubmit={handleRegister}>
-                    <h1 className="h3 mb-3 font-weight-normal">Please Register for DONE<span>&#8253;</span></h1>
-                    <Form.Group>
-                        <fieldset>
-                            <div>
-                                <Form.Label htmlFor="fullName"> Full Name </Form.Label>
-                                <Form.Control onChange={updateCustomer}
-                                    type="text" id="fullName" className="form-control"
-                                    placeholder="Enter your name" required autoFocus />
-                            </div>
-                        </fieldset>
-                    </Form.Group>
-                    <fieldset>
-                        <label htmlFor="email"> Email address </label>
-                        <input onChange={updateCustomer}
-                            type="email" id="email" className="form-control"
-                            placeholder="Email address" required />
-                    </fieldset>
-                    <fieldset>
-                        <label htmlFor="phoneNumber"> Phone Number </label>
-                        <input onChange={updateCustomer}
-                            type="tel" id="phoneNumber" className="form-control"
-                            placeholder="Phone Number" maxLength={10} required />
-                    </fieldset>
-                    <fieldset>
-                        <input onChange={(evt) => {
-                            const copy = { ...customer }
-                            copy.isAdmin = evt.target.checked
-                            setCustomer(copy)
-                        }}
-                            type="checkbox" id="isAdmin" />
-                        <label htmlFor="email"> I am a Parent </label>
-                    </fieldset>
-                    <fieldset>
-                        <button type="submit"> Register </button>
-                        <button type="button" onClick={() => navigate("/")}> Back to Login </button>
-                    </fieldset>
+                    <Row className="mb-2">
+                        <h1 id="done__register" className="h3 mb-4 font-weight-normal">Please Register for DONE<span>&#8253;</span></h1>
+                    </Row>
+                    <Row className="mb-3">
+                        <Form.Group>
+                            <Form.Label htmlFor="fullName"> Full Name </Form.Label>
+                            <Form.Control onChange={updateCustomer}
+                                type="text" id="fullName" className="form-control mb-3"
+                                placeholder="Enter your name" required autoFocus />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label htmlFor="email"> Email address </Form.Label>
+                            <Form.Control onChange={updateCustomer}
+                                type="email" id="email" className="form-control mb-3"
+                                placeholder="Email address" required />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label htmlFor="phoneNumber"> Phone Number </Form.Label>
+                            <Form.Control onChange={updateCustomer}
+                                type="tel" id="phoneNumber" className="form-control mb-3"
+                                placeholder="Phone Number" maxLength={10} required />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Check onChange={(evt) => {
+                                const copy = { ...customer }
+                                copy.isAdmin = evt.target.checked
+                                setCustomer(copy)
+                            }}
+                                type="checkbox" id="isAdmin" label="Parent" />
+                        </Form.Group>
+
+                    </Row>
+                    <Row>
+
+                        <Col>
+                            <Button id="btn_btn-Register" variant="success" type="submit"> Register </Button>
+                        </Col>
+                        <Col>
+                            <Button id="btn_btn-Register" type="button" onClick={() => navigate("/")}> Back to Login </Button>
+                        </Col>
+
+                    </Row>
                 </Form>
             </Container>
-        </main>
+        </main >
     )
 }
 

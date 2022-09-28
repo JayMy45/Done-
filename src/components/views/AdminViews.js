@@ -6,9 +6,7 @@ import { TaskDetails } from "../tasks/TaskDetails"
 import { TaskList } from "../tasks/TaskList"
 import { UpdateTasks } from "../update/UpdateTasks"
 import { UserLists } from "../users/UserLists"
-import smLogo from "/Users/jeremymyers/workspace/done-capstone/src/doneAdmin.sm.png"
-
-// import logo from "/Users/jeremymyers/workspace/done-capstone/src/doneAdmin.lg.png"
+import smLogo from "/Users/jeremymyers/workspace/done-capstone/src/Done.admin.RootImage.png"
 
 
 export const AdminViews = () => {
@@ -19,8 +17,7 @@ export const AdminViews = () => {
                     {
 
                     }
-                    <img src={smLogo} width="300" alt="Done Logo" />
-                    {/* <img src={logo} width="500" alt="Done Logo" /> */}
+                    <img src={smLogo} width="150" className="img_Logo m-5" alt="Done Logo" />
 
 
                     <Outlet />

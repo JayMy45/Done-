@@ -34,13 +34,15 @@ export const Login = () => {
     return (
         <main className="container--login">
 
-            <Container >
+            <Container id="type__container" className="d-grid h-25 w-50" >
                 <Form className="form--login mb-3" onSubmit={handleLogin}>
-                    <h1>DONE<span>&#8253;</span></h1>
-                    <h2>Please sign in</h2>
+                    <Form.Group className="mb-5">
+                        <h1>DONE<span>&#8253;</span></h1>
+                    </Form.Group>
                     <div className="jumbotron">
+                        <h2 className="mb-3">Please sign in:  </h2>
                         <Form.Group className="mb-3">
-                            <Form.Label htmlFor="inputEmail"> Email address </Form.Label>
+                            <Form.Label className="" htmlFor="inputEmail"> Email address </Form.Label>
                             <Form.Control type="email"
                                 value={email}
                                 onChange={evt => set(evt.target.value)}
