@@ -5,6 +5,9 @@ import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
+import logoOG from "/Users/jeremymyers/workspace/done-capstone/src/Done.Logo.OG.png"
+
+
 import "./Login.css"
 
 export const Register = (props) => {
@@ -108,6 +111,12 @@ export const Register = (props) => {
 
                     </Row>
                 </Form>
+                <Row>
+                    <Form.Label className="powered__by-bottom">
+                        <h6 className="powered_register-center">Powered by  <img src={logoOG} className="" width="150" height="100" alt="Powered By Done Logo" /></h6>
+
+                    </Form.Label>
+                </Row>
             </Container>
         </main >
     )

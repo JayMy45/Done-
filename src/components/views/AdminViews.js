@@ -17,7 +17,7 @@ export const AdminViews = () => {
                     {
 
                     }
-                    <img src={smLogo} width="150" className="img_Logo m-5" alt="Done Logo" />
+                    <img src={smLogo} width="150" className="img_Logo m-4" alt="Done Logo" />
 
 
                     <Outlet />

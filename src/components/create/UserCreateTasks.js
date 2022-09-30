@@ -3,7 +3,11 @@ import { useNavigate } from "react-router-dom"
 import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 import "./Create.css"
+import poweredByDoneUser from "/Users/jeremymyers/workspace/done-capstone/src/poweredByDoneUser.png"
+import doneUserLg from "/Users/jeremymyers/workspace/done-capstone/src/Done.User.lg.png"
 
 export const UserCreateTasks = () => {
 
@@ -129,72 +133,93 @@ export const UserCreateTasks = () => {
     }
 
     return (
-        <Container id="task__container">
-            < Form className="tasks__new-task" >
-                <h2 className="task__form-title mb-3 text-center">Create A New Tasks</h2>
+        <Container id="type__container" className="d-grid h-25 w-50">
+            < Form className="tasks__new-task jumbotron" >
+                <Row>
+                    <h2 className="task__form-title mb-3 text-center">Create A New Tasks</h2>
+                </Row>
+                <Row>
 
-                <div className="user__assigned">
-
+                    <div className="user__assigned">
+                        {/* 
                     <div>
                         <Form.Label className="user__assigned--task mb-1">Assigned To:</Form.Label>
+                    </div> */}
+                        <Form.Group>
+                            {
+                                users.map(
+                                    (user) => {
+                                        if (doneUserObject.id === user.id)
+                                            return <Form.Label className="mb-4 fs-1" key={`user--${user.id}`}
+                                            ><strong><em>{user.fullName}</em></strong></Form.Label>
+                                    })
+                            }
+                        </Form.Group>
                     </div>
-                    <Form.Group>
-                        {
-                            users.map(
-                                (user) => {
-                                    if (doneUserObject.id === user.id)
-                                        return <Form.Label className="mb-4 fs-1" key={`user--${user.id}`}
-                                        ><strong>{user.fullName}</strong></Form.Label>
-                                })
-                        }
-                    </Form.Group>
-                </div>
+                    <Col md={7}>
+                        <Form.Group>
+                            <div className="form-group">
+                                <Form.Label >Enter Instructions Below:</Form.Label>
+                                <Form.Control
+                                    as="textarea"
+                                    required autoFocus
+                                    style={{ height: "10rem" }}
+                                    className="form-control mb-4"
+                                    placeholder="Enter Instructions..."
+                                    value={newTasks.instructions}
+                                    onChange={(evt) => {
+                                        const copy = { ...newTasks }
+                                        copy.instructions = evt.target.value
+                                        setNewTasks(copy)
+                                    }
+                                    } />
+                            </div>
+                        </Form.Group>
+                    </Col>
+                    <Col md={5}>
+                        <Form.Group className="mb-1">
+                            <div>
+                                <img src={doneUserLg} className="img__admin--lg-create" width="200" height="161" alt="Done Logo" />
+                            </div>
+                        </Form.Group>
+
+                    </Col>
+
+                </Row>
                 <Form.Group>
-                    <div className="form-group">
-                        <Form.Label >Enter Instructions Below:</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            required autoFocus
-                            style={{ height: "10rem" }}
-                            className="form-control mb-4"
-                            placeholder="Enter Instructions..."
-                            value={newTasks.instructions}
-                            onChange={(evt) => {
+
+                    <Form.Label>Choose a Task Type </Form.Label>
+                    <Form.Select className="form-group mb-3"
+                        onChange={
+                            (evt) => {
                                 const copy = { ...newTasks }
-                                copy.instructions = evt.target.value
+                                copy.typeId = evt.target.value
                                 setNewTasks(copy)
                             }
-                            } />
-                    </div>
-                </Form.Group>
-                <Form.Group>
-                    <fieldset>
-                        <Form.Label>Choose a Task Type </Form.Label>
-                        <Form.Select className="form-group mb-3"
-                            onChange={
-                                (evt) => {
-                                    const copy = { ...newTasks }
-                                    copy.typeId = evt.target.value
-                                    setNewTasks(copy)
-                                }
-                            }>
-                            <option value={0}>Tasks...</option>
-                            {types.map(
-                                (type) => {
-                                    return <option
-                                        name="type"
-                                        className="form-control dropdown"
-                                        value={type.id}
-                                        key={`type--${type.id}`}
-                                    >{type.name}</option>
-                                }
-                            )}
-                        </Form.Select>
-                    </fieldset>
+                        }>
+                        <option value={0}>Tasks...</option>
+                        {types.map(
+                            (type) => {
+                                return <option
+                                    name="type"
+                                    className="form-control dropdown"
+                                    value={type.id}
+                                    key={`type--${type.id}`}
+                                >{type.name}</option>
+                            }
+                        )}
+                    </Form.Select>
+
                 </Form.Group>
                 <div className="mb-2 d-grid"><Button className="btn__new-task" variant="success" onClick={(ClickEvent) => createNewTasks(ClickEvent, users.id)}>Assign New Task</Button></div>
-                <div className="d-grid"><Button type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button></div>
+                <div className="d-grid"><Button type="button" variant="info" onClick={() => navigate("/tasks")}>Return to Task List</Button></div>
             </Form >
+            <Row>
+                <Form.Label className="powered__by-bottom">
+                    <h6 className="powered-by">Powered by  <img src={poweredByDoneUser} className="" width="55" height="50" alt="Powered By Done Logo" /></h6>
+                </Form.Label>
+
+            </Row>
         </Container >
     )
 }

@@ -104,7 +104,7 @@ export const UpdateTasks = () => {
                         </Col>
 
                         <Col>
-                            <Button type="button" variant="secondary" className="w-100" onClick={() => navigate("/tasks")}>Task List</Button>
+                            <Button type="button" variant="info" className="w-100" onClick={() => navigate("/tasks")}>Task List</Button>
                         </Col>
 
                     </Row>

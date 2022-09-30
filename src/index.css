@@ -14,7 +14,8 @@ code {
 } */
 
 body {
-  background: #F5F5F5;
+  background-image: url("/Users/jeremymyers/workspace/done-capstone/src/ProbableBackground.White.png");
+  /* background-repeat: no-repeat; */
   min-height: 100vh;
   display: grid;
 }

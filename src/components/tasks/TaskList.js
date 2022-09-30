@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import poweredByDone from "/Users/jeremymyers/workspace/done-capstone/src/PoweredbyDone.admin.png"
+import poweredByDoneUser from "/Users/jeremymyers/workspace/done-capstone/src/poweredByDoneUser.png"
 
 
 
@@ -234,7 +237,7 @@ export const TaskList = () => {
                                                 </div>
                                             </fieldset>
                                             <div className="user__detail">
-                                                <h4>click link for details:</h4>
+                                                <h4><em>click link for details:</em></h4>
                                                 <Link className="user__detail--link" to={`/tasks/${task.id}`}><strong>{task.type.name}</strong></Link>
                                             </div>
 
@@ -266,6 +269,22 @@ export const TaskList = () => {
                 }
             </>
         </Form>
+        <Row className="taskList__centered">
+            {
+                doneUserObject.admin
+                    ? <>
+                        <Form.Label className="powered__by-bottom">
+                            <h6 id="powered_by-center">Powered by  <img src={poweredByDone} className="" width="55" height="50" alt="Powered By Done Logo" /></h6>
+
+                        </Form.Label>
+                    </> : <>
+                        <Form.Label className="powered__by-bottom">
+                            <h6 id="powered_by-center">Powered by  <img src={poweredByDoneUser} className="" width="55" height="50" alt="Powered By Done Logo" /></h6>
+
+                        </Form.Label>
+                    </>
+            }
+        </Row>
     </Container>
 }
 

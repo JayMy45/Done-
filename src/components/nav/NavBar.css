@@ -18,6 +18,10 @@
     margin-left: auto;
 }
 
+.margin-left {
+    margin-left: 50%;
+}
+
 .mr__right {
     margin-right: auto;
 }
@@ -29,4 +33,10 @@
 
 #done__text-Nav {
     font-size: larger;
+}
+
+.font-size-AdminNav {
+    font-size: x-small;
+    color: white;
+    margin-left: 2rem;
 }

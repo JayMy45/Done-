@@ -144,7 +144,7 @@ export const CreateTaskTypes = () => {
                             </Form.Group>
 
                             <Form.Group>
-                                <div className="d-grid"><Button type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button></div>
+                                <div className="d-grid"><Button variant="info" type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button></div>
                             </Form.Group>
                         </Row>
                     </Col>

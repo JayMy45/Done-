@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react"
-import { Container, Form } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
+import Form from 'react-bootstrap/Form';
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import logoAdminLg from "/Users/jeremymyers/workspace/done-capstone/src/Done.Admin.lg.ppt.png"
+import poweredByDone from "/Users/jeremymyers/workspace/done-capstone/src/PoweredbyDone.admin.png"
 
 
 
@@ -115,86 +121,112 @@ export const CreateTasks = () => {
   }
 
   return (
-    <Container>
-      <Form className="tasks__new-task">
-        <h2 className="task__form-title">Assign New Task</h2>
-        <Form.Group>
-          <fieldset>
-            <div className="form-group">
-              <Form.Label htmlFor="instructions"><strong>Enter Instructions Here:</strong></Form.Label>
-              <Form.Control
-                required autoFocus
-                as="textarea"
-                style={{ height: "10rem" }}
-                className="form-control"
-                placeholder="Enter Instructions..."
-                value={newTasks.instructions}
-                onChange={(evt) => {
-                  const copy = { ...newTasks }
-                  copy.instructions = evt.target.value
-                  setNewTasks(copy)
-                }
-                } />
-            </div>
-          </fieldset>
-        </Form.Group>
-        <Form.Group>
+    <Container id="type__container" className="d-grid h-25 w-50">
+      <Form className="tasks__new-task jumbotron">
+        <Row>
+          <Row className="mb-3">
+            <h2 className="task__form-title">Assign New Task</h2>
+          </Row>
+          <Col md={6}>
 
-          <div><h3>Choose a Team Member: </h3></div>
-          <Form.Select className="form-group"
-            onChange={
-              (evt) => {
-                const copy = { ...newTasks }
-                copy.userId = evt.target.value
-                setNewTasks(copy)
-              }
-            }>
-            {
+            <Row>
+              <Form.Group>
+                <div className="form-group mb-3">
+                  <Form.Label htmlFor="instructions"><strong>Enter Instructions Here:</strong></Form.Label>
+                  <Form.Control
+                    required autoFocus
+                    as="textarea"
+                    style={{ height: "10rem" }}
+                    className="form-control"
+                    placeholder="Enter Instructions..."
+                    value={newTasks.instructions}
+                    onChange={(evt) => {
+                      const copy = { ...newTasks }
+                      copy.instructions = evt.target.value
+                      setNewTasks(copy)
+                    }
+                    } />
+                </div>
+              </Form.Group>
+            </Row>
 
+            <Row>
+              <Form.Group className="mb-3">
+                <div><Form.Label><strong>Choose a Team Member:</strong></Form.Label></div>
+                <Form.Select className="form-group"
+                  onChange={
+                    (evt) => {
+                      const copy = { ...newTasks }
+                      copy.userId = evt.target.value
+                      setNewTasks(copy)
+                    }
+                  }>
+                  <option value={0}>Assign a Team Member</option>
+                  {users.map(
+                    (user) => {
+                      return <option
+                        name="location"
+                        className="form-control dropdown"
+                        value={user.id}
+                        key={`user--${user.id}`}
+                      >{user.fullName}</option>
+                    }
+                  )}
+                </Form.Select>
+              </Form.Group>
+            </Row>
 
-            }
-            <option value={0}>Assign a Team Member</option>
-            {users.map(
-              (user) => {
-                return <option
-                  name="location"
-                  className="form-control dropdown"
-                  value={user.id}
-                  key={`user--${user.id}`}
-                >{user.fullName}</option>
-              }
-            )}
-          </Form.Select>
+            <Row>
+              <Form.Group className="" id="done__task--type">
+                <div><Form.Label><strong>Choose a Task Type</strong></Form.Label></div>
+                <Form.Select className="form-group"
+                  onChange={
+                    (evt) => {
+                      const copy = { ...newTasks }
+                      copy.typeId = evt.target.value
+                      setNewTasks(copy)
+                    }
+                  }>
+                  <option value={0}>Tasks...</option>
+                  {types.map(
+                    (type) => {
+                      return <option
+                        name="type"
+                        className="form-control dropdown"
+                        value={type.id}
+                        key={`type--${type.id}`}
+                      >{type.name}</option>
+                    }
+                  )}
+                </Form.Select>
+              </Form.Group>
+            </Row>
+          </Col>
 
-        </Form.Group>
-        <Form.Group>
+          <Col md={6}>
+            <Row className="">
+              <Form.Group className="mb-4">
+                <div>
+                  <img src={logoAdminLg} className="img__admin--lg-create" width="240" height="220" alt="Done Logo" />
+                </div>
+              </Form.Group>
+            </Row>
 
-          <div><h3>Choose a Task Type </h3></div>
-          <Form.Select className="form-group"
-            onChange={
-              (evt) => {
-                const copy = { ...newTasks }
-                copy.typeId = evt.target.value
-                setNewTasks(copy)
-              }
-            }>
-            <option value={0}>Tasks...</option>
-            {types.map(
-              (type) => {
-                return <option
-                  name="type"
-                  className="form-control dropdown"
-                  value={type.id}
-                  key={`type--${type.id}`}
-                >{type.name}</option>
-              }
-            )}
-          </Form.Select>
+            <Row className="done__btn-row">
+              <Button className="btn_return-taskList mb-1" variant="info" id="btn_rtn" type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button>
+              <Button className="btn_create-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</Button>
+            </Row>
+          </Col>
 
-        </Form.Group>
-        <button className="btn__new-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</button>
-        <button type="button" onClick={() => navigate("/tasks")}>Return to Task List</button>
+        </Row>
       </Form >
+
+      <Row>
+        <Form.Label className="powered__by-bottom">
+          <h6 className="powered-by">Powered by  <img src={poweredByDone} className="" width="55" height="50" alt="Powered By Done Logo" /></h6>
+        </Form.Label>
+      </Row>
+
     </Container>
   )
 }

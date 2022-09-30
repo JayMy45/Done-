@@ -4,7 +4,7 @@ import { TaskDetails } from "../tasks/TaskDetails"
 import { TaskList } from "../tasks/TaskList"
 import { UserCreateTasks } from "../create/UserCreateTasks"
 import { User } from "../users/User"
-import userLogo from "/Users/jeremymyers/workspace/done-capstone/src/Done.dark.png"
+import userLogo from "/Users/jeremymyers/workspace/done-capstone/src/doneUser.sm.png"
 
 export const UserViews = () => {
     return (
@@ -12,7 +12,7 @@ export const UserViews = () => {
             <Route path="/" element={
                 <>
 
-                    <img src={userLogo} width="300" alt="Done Logo" />
+                    <img src={userLogo} width="200" className="m-5" alt="Done Logo" />
 
 
                     <Outlet />

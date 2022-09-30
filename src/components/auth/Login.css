@@ -70,7 +70,7 @@ fieldset {
 
 #type__container {
     place-items: center center;
-    margin-top: 5%;
+    margin-top: 4%;
 }
 
 #type__form {
@@ -91,5 +91,10 @@ fieldset {
 }
 
 #done__register {
+    text-align: center;
+}
+
+.powered_register-center {
+    margin-top: 30%;
     text-align: center;
 }
