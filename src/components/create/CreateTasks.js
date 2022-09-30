@@ -207,14 +207,14 @@ export const CreateTasks = () => {
             <Row className="">
               <Form.Group className="mb-4">
                 <div>
-                  <img src={logoAdminLg} className="img__admin--lg-create" width="240" height="220" alt="Done Logo" />
+                  <img src={logoAdminLg} className="img__admin--lg-create" width="240" height="200" alt="Done Logo" />
                 </div>
               </Form.Group>
             </Row>
 
             <Row className="done__btn-row">
-              <Button className="btn_return-taskList mb-1" variant="info" id="btn_rtn" type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button>
-              <Button className="btn_create-task" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</Button>
+              <Button className="btn_return-taskList mb-4" variant="info" id="btn_rtn" type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button>
+              <Button className="btn_create-task" variant="success" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</Button>
             </Row>
           </Col>
 

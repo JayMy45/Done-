@@ -170,59 +170,65 @@ export const TaskList = () => {
 
     return <Container>
         <Form>
-            <><h2>List of Tasks</h2>
+            <>
+                <div className="done_task-banner">
+                    <Row className="done_task-row">
+                        <h2>List of Tasks</h2>
+                    </Row>
+                    <section className="btn__btn--section mb-3">
+                        <div className="btn__btn--section1 ">
+                            <>
+                                {
+                                    doneUserObject.admin
+                                        ? <>
+                                            <Button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</Button>
+                                            <Button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</Button>
+                                        </> : <></>
+                                }
+                            </>
+                        </div>
+                        <div className="btn__btn--div2">
+                            <>
+                                {
+                                    doneUserObject.admin
+                                        ? <>
+                                            <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create New Task</Button>
+                                            <Button variant="dark" className="btn btn__create--type" onClick={() => navigate("/type/create")}>Create Type</Button>
+                                        </> : <>
+                                            <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</Button>
+                                        </>
+                                }
+                            </>
+                        </div>
+                    </section>
 
-                <section className="btn__btn--section mb-3">
-                    <div className="btn__btn--section1 ">
-                        <>
-                            {
-                                doneUserObject.admin
-                                    ? <>
-                                        <Button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</Button>
-                                        <Button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</Button>
-                                    </> : <></>
-                            }
-                        </>
-                    </div>
-                    <div className="btn__btn--div2">
-                        <>
-                            {
-                                doneUserObject.admin
-                                    ? <>
-                                        <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/create")}>Create New Task</Button>
-                                        <Button variant="dark" className="btn btn__create--type" onClick={() => navigate("/type/create")}>Create Type</Button>
-                                    </> : <>
-                                        <Button variant="secondary" className="btn btn__create" onClick={() => navigate("/tasks/user/create")}>User Create</Button>
+
+                    <section>
+                        <div className="user__dropdown">
+                            <>
+                                {
+                                    <>
+                                        <fieldset>
+                                            {
+                                                doneUserObject.admin
+                                                    ? <div>
+
+                                                        <Form.Check
+                                                            type="switch"
+                                                            checked={completeButtonFilter}
+                                                            onChange={unCheckButton}
+                                                            label="Completed" />
+
+                                                    </div>
+                                                    : <></>
+                                            }
+                                        </fieldset>
                                     </>
-                            }
-                        </>
-                    </div>
-                </section>
-                <section>
-                    <div className="user__dropdown">
-                        <>
-                            {
-                                <>
-                                    <fieldset>
-                                        {
-                                            doneUserObject.admin
-                                                ? <div>
-
-                                                    <Form.Check
-                                                        type="switch"
-                                                        checked={completeButtonFilter}
-                                                        onChange={unCheckButton}
-                                                        label="Completed" />
-
-                                                </div>
-                                                : <></>
-                                        }
-                                    </fieldset>
-                                </>
-                            }
-                        </>
-                    </div>
-                </section>
+                                }
+                            </>
+                        </div>
+                    </section>
+                </div>
                 {
                     <article className="tasks">
                         {
@@ -266,7 +272,9 @@ export const TaskList = () => {
                             )
                         }
                     </article >
+
                 }
+
             </>
         </Form>
         <Row className="taskList__centered">

@@ -18,8 +18,8 @@
     margin-left: auto;
 }
 
-.margin-left {
-    margin-left: 50%;
+#margin-right {
+    margin-right: 50%;
 }
 
 .mr__right {
@@ -37,6 +37,7 @@
 
 .font-size-AdminNav {
     font-size: x-small;
-    color: white;
+    color: black;
+    margin-top: 0.25rem;
     margin-left: 2rem;
 }

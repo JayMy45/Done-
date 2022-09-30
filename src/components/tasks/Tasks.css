@@ -5,7 +5,7 @@
     border: .5px solid darkgray;
     padding: 2rem;
     border-radius: 10px;
-    margin: 5rem;
+    margin: 3rem;
     background: white;
     box-shadow: 3px 3px 13px 0px rgba(0, 0, 0, 0.73);
 }
@@ -157,4 +157,21 @@
 #powered_by-center {
     margin-top: 10%;
     text-align: center;
+}
+
+.done_task-banner {
+    border: 1px solid lightgray;
+    opacity: 90%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 3px 3px 13px 0px rgba(0, 0, 0, 0.73);
+}
+
+.done_task-row {
+    padding-bottom: 1rem;
+}
+
+.done_task-row {
+    margin-bottom: .5rem;
 }
