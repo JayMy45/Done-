@@ -70,6 +70,7 @@ fieldset {
 
 #type__container {
     place-items: center center;
+    margin-top: 4%;
 }
 
 #type__form {
@@ -81,5 +82,19 @@ fieldset {
     background-color: #e9ecef;
     border-radius: 15px;
     width: 600px;
+    box-shadow: 2px 2px 11px 0px rgba(0, 0, 0, 0.45);
 
+}
+
+#btn_btn-Register {
+    width: 100%;
+}
+
+#done__register {
+    text-align: center;
+}
+
+.powered_register-center {
+    margin-top: 30%;
+    text-align: center;
 }

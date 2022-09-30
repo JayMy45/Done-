@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import "./NavBar.css"
@@ -5,6 +6,7 @@ import "./NavBar.css"
 export const UserNav = () => {
 
     const navigate = useNavigate()
+
 
     return (
         <>
@@ -20,6 +22,9 @@ export const UserNav = () => {
                         <Nav className="mr__right">
                             <Nav.Link href="/tasks">Tasks</Nav.Link>
                             <Nav.Link href="/tasks/user/create">Create</Nav.Link>
+                        </Nav>
+                        <Nav className="margin-left">
+
                         </Nav>
                         <Nav className="mr__left">
                             <Nav.Link href="" onClick={() => {

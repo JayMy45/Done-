@@ -2,10 +2,12 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    border: 2px solid black;
-    padding: 1.5rem;
-    border-radius: 15px;
-    margin: 5rem;
+    border: .5px solid darkgray;
+    padding: 2rem;
+    border-radius: 10px;
+    margin: 3rem;
+    background: white;
+    box-shadow: 3px 3px 13px 0px rgba(0, 0, 0, 0.73);
 }
 
 .btn:hover {
@@ -41,26 +43,18 @@
 }
 
 .done__assignment {
-    border: 2px dotted goldenrod;
+    border: 2px inset goldenrod;
     margin-bottom: 2%;
     border-radius: 15px;
-    padding: 2%;
-}
-
-.task__user-fullName {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: .5rem;
-    background-color: beige;
-    margin-top: 5%;
-}
-
-.task__user-assigned {
-    text-align: center;
+    background-color: white;
+    padding: 5%;
+    box-shadow: inset 2px 2px 8px 0px #000000;
 }
 
 .btn__done {
     background-color: rgb(127, 191, 78);
+    margin-right: .8rem;
+    margin-left: 4px;
 
 
 }
@@ -82,17 +76,20 @@
 .btn__div {
     display: flex;
     flex-direction: row;
-    border: 2px solid black;
-    background-color: beige;
-    border-radius: 15px;
+    border: 1px outset rgba(213, 213, 213, 0.35);
+    background-color: white;
+    border-radius: 10px;
     padding: 1.5rem;
     width: fit-content;
+    box-shadow: 3px 3px 13px 0px rgba(173, 173, 173, 0.73);
 }
 
 .done__task--complete {
     background-color: white;
     text-align: center;
     margin: auto;
+    margin-left: 3%;
+    padding-right: .8rem;
 }
 
 .user__detail--link {
@@ -105,5 +102,76 @@
 }
 
 .task__manage--userName {
-    border: 1px solid black;
+    border: 1px solid lightgray;
+    border-radius: 25%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 7.5px;
+    padding-right: 7.5px;
+    background: -moz-linear-gradient(left, #ECECEC 0%, #F1F1F1 59%, #ECECEC 100%);
+    box-shadow: 3px 3px 13px 0px rgba(173, 173, 173, 0.73);
+
+    /* background-color: azure; */
+}
+
+
+.task__user-assigned {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.task__user-fullName {
+    padding-bottom: .5rem;
+    /* background-color: beige; */
+    margin-top: 1px;
+    border-radius: 50px;
+}
+
+.task__form-title {
+    text-align: center;
+}
+
+#done__task--type {
+    margin-top: 3%;
+}
+
+.btn_return-taskList {
+
+    margin-top: 100%;
+    align-items: center;
+}
+
+.btn_create-task {
+
+    align-items: center;
+}
+
+.img__admin--lg-create {
+    margin-top: 2rem;
+}
+
+#btn_rtn {
+    margin-top: 5%;
+}
+
+#powered_by-center {
+    margin-top: 10%;
+    text-align: center;
+}
+
+.done_task-banner {
+    border: 1px solid lightgray;
+    opacity: 90%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 3px 3px 13px 0px rgba(0, 0, 0, 0.73);
+}
+
+.done_task-row {
+    padding-bottom: 1rem;
+}
+
+.done_task-row {
+    margin-bottom: .5rem;
 }
