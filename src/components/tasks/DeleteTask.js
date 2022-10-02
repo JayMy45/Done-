@@ -123,7 +123,6 @@ export const DeleteTasks = () => {
                         </Row>
                     </Container>
 
-
                 </>
         }
     </>
