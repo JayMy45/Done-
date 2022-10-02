@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import poweredByDone from "/Users/jeremymyers/workspace/done-capstone/src/PoweredbyDone.admin.png"
+import poweredByDone from "/Users/jeremymyers/workspace/done-capstone/src/Done.Power.png"
 import poweredByDoneUser from "/Users/jeremymyers/workspace/done-capstone/src/poweredByDoneUser.png"
 
 
@@ -295,27 +295,3 @@ export const TaskList = () => {
         </Row>
     </Container>
 }
-
-
-
-{/* <div><h3>Jump To: </h3></div>
-<select className="form-group"
-    onChange={(evt) => {
-        if (evt.target.value === tasks.userId) {
-            const myFilteredJumpToTask = tasks.filter(task => task.userId === evt.target.value)
-            setFilteredTasks(myFilteredJumpToTask)
-        }
-    }}
->
-    <option value={0}>Choose a Team Member</option>
-    {users.map(
-        (user) => {
-            return <option
-                name="location"
-                className="form-control dropdown"
-                value={user.id}
-                key={`user--${user.id}`}
-            >{user.fullName}</option>
-        }
-    )}
-</select> */}

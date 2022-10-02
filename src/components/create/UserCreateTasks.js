@@ -141,10 +141,6 @@ export const UserCreateTasks = () => {
                 <Row>
 
                     <div className="user__assigned">
-                        {/* 
-                    <div>
-                        <Form.Label className="user__assigned--task mb-1">Assigned To:</Form.Label>
-                    </div> */}
                         <Form.Group>
                             {
                                 users.map(

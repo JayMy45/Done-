@@ -52,12 +52,13 @@ export const AdminViews = () => {
                     <img src={smLogo} width="200" className="img_Logo m-4" alt="Done Logo" />
 
                     <Outlet />
+
                 </>
             }>
 
+                <Route path="/" element={<DeleteTasks />} />
                 <Route path="tasks" element={<TaskList />} />
                 <Route path="tasks/create" element={<CreateTasks />} />
-                <Route path="tasks/delete" element={<DeleteTasks />} />
                 <Route path="tasks/update/:taskId" element={<UpdateTasks />} />
                 <Route path="tasks/:taskId" element={<TaskDetails />} />
                 <Route path="type/create" element={<CreateTaskTypes />} />

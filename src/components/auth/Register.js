@@ -6,8 +6,6 @@ import Button from "react-bootstrap/Button"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import logoOG from "/Users/jeremymyers/workspace/done-capstone/src/Done.Logo.OG.png"
-
-
 import "./Login.css"
 
 export const Register = (props) => {

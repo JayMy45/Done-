@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import poweredByDone from "/Users/jeremymyers/workspace/done-capstone/src/PoweredbyDone.admin.png"
+import poweredByDone from "/Users/jeremymyers/workspace/done-capstone/src/Done.Power.png"
 import "./Update.css"
 
 export const UpdateTasks = () => {

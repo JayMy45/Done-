@@ -6,6 +6,7 @@ import { UserCreateTasks } from "../create/UserCreateTasks"
 import { User } from "../users/User"
 import userLogo from "/Users/jeremymyers/workspace/done-capstone/src/doneUser.sm.png"
 import { useEffect, useState } from "react"
+import { DeleteTasks } from "../tasks/DeleteTask"
 
 export const UserViews = () => {
     const [users, setUsers] = useState([])
@@ -38,7 +39,7 @@ export const UserViews = () => {
                                     (user) => {
                                         if (doneUserObject.id === user.id)
                                             return <label className="font-size-AdminNav" key={`user--${user.id}`}
-                                            ><span class="fw-lighter fs-6">Welcome:</span> <span className="fw-bold fs-6"><em>{user.fullName}</em></span></label>
+                                            ><span className="fw-lighter fs-6">Welcome:</span> <span className="fw-bold fs-6"><em>{user.fullName}</em></span></label>
                                     })
                             }
                         </div>
@@ -49,7 +50,7 @@ export const UserViews = () => {
                     <Outlet />
                 </>
             }>
-
+                <Route path="/" element={<DeleteTasks />} />
                 <Route path="tasks" element={<TaskList />} />
                 <Route path="tasks/user/create" element={<UserCreateTasks />} />
                 <Route path="tasks/:taskId" element={<TaskDetails />} />
