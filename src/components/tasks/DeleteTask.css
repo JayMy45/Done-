@@ -6,11 +6,15 @@ figcaption {
 }
 
 .powered__by-bottom-base {
-    margin-top: 1%;
+    margin-top: 85%;
 }
 
 @media screen and (max-width: 768px) {
     figcaption {
         position: inherit;
     }
+}
+
+.Nashville {
+    border-radius: 20px;
 }

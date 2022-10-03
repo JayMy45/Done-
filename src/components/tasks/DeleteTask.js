@@ -96,7 +96,7 @@ export const DeleteTasks = () => {
                     </Container>
                 </>
                 : <>
-                    <Container>
+                    <Container id="type__container" className="d-grid h-10">
                         <Row>
                             <figure className="position-relative">
 
@@ -110,13 +110,13 @@ export const DeleteTasks = () => {
                                             })
                                     }</figcaption>
 
-                                <img src={nashvilleYeah} className="img-fluid" width="1250" height="750" alt="Done Logo" />
+                                <img src={nashvilleYeah} className="img-fluid Nashville" width="1250" height="750" alt="Done Logo" />
                             </figure>
                         </Row>
                         <Row>
 
-                            <Form.Label className="powered__by-bottom-base">
-                                <h6 className="powered_register-center">Powered by  <img src={logoOG} className="" width="150" height="100" alt="Powered By Done Logo" /></h6>
+                            <Form.Label >
+                                <h6 className="powered__by-bottom-base">Powered by  <img src={logoOG} className="" width="150" height="100" alt="Powered By Done Logo" /></h6>
 
                             </Form.Label>
 
