@@ -132,7 +132,7 @@ export const CreateTaskTypes = () => {
                             </Form.Select>
 
                         </Form.Group>
-                        <div className="d-grid mb-2"><Button variant="success" type="submit" className="btn__new-task" onClick={(ClickEvent) => createNewTaskType(ClickEvent)}>Create New Type</Button></div>
+                        <div className="d-grid mb-2"><Button variant="dark" type="submit" className="btn__new-task" onClick={(ClickEvent) => createNewTaskType(ClickEvent)}>Create New Type</Button></div>
 
                     </Col>
                     <Col lg={6} >

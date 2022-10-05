@@ -214,7 +214,7 @@ export const CreateTasks = () => {
 
             <Row className="done__btn-row">
               <Button className="btn_return-taskList mb-4" variant="info" id="btn_rtn" type="button" onClick={() => navigate("/tasks")}>Return to Task List</Button>
-              <Button className="btn_create-task" variant="success" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</Button>
+              <Button className="btn_create-task" variant="secondary" onClick={(ClickEvent) => createNewTasks(ClickEvent)}>Create New Task</Button>
             </Row>
           </Col>
 

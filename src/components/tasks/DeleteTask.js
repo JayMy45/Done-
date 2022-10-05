@@ -65,7 +65,13 @@ export const DeleteTasks = () => {
                                                         className="form-control dropdown"
                                                         value={user.id}
                                                         key={`user--${user.id}`}
-                                                    >{user.fullName}</ListGroup.Item>
+                                                    >{user.fullName}
+                                                        {
+                                                            user.isAdmin && doneUserObject.admin
+                                                                ? <>  <span className="text-danger">admin</span></>
+                                                                : <></>
+                                                        }
+                                                    </ListGroup.Item>
                                                 }
                                             )}
                                         </ListGroup>
@@ -92,6 +98,12 @@ export const DeleteTasks = () => {
                                     </Form.Group>
                                 </Form>
                             </Col>
+                            <Row>
+                                <Form.Label >
+                                    <h6 className="powered__by-bottom-base">Powered by  <img src={logoOG} className="" width="150" height="100" alt="Powered By Done Logo" /></h6>
+
+                                </Form.Label>
+                            </Row>
                         </Row>
                     </Container>
                 </>
@@ -117,7 +129,6 @@ export const DeleteTasks = () => {
 
                             <Form.Label >
                                 <h6 className="powered__by-bottom-base">Powered by  <img src={logoOG} className="" width="150" height="100" alt="Powered By Done Logo" /></h6>
-
                             </Form.Label>
 
                         </Row>
