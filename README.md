@@ -1,3 +1,8 @@
+# DONE‽ 
+
+Managing a household has its chanllenges.  One that I have personaly experience with is devying out chores equally.  Not only is equal distribution a issue but keeping track of whos to do what and when it was completed are also paramount considerations. Here is a solution to creating and distributing chores to family members.  DONE‽ has been created to integrate into family life seemlessly with easy to use features and user-friendly application of assigning chores to all who may need something to do.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
