@@ -83,26 +83,6 @@ export const TaskList = () => {
         [completeButtonFilter]
     )
 
-    const unCheckButton = () => {
-
-        completeButtonFilter === doneUserObject.admin === true
-            ? setCompleteButtonFilter(false)
-            : completeButtonFilter === false && doneUserObject.admin === true
-                ? setCompleteButtonFilter(true)
-                : <></>
-    }
-
-    const unCheckUserButton = () => {
-
-        if (!doneUserObject.admin && completeButtonFilter === false) {
-            const myCompleteButtonFilterTask = tasks.filter(task => task.completion === doneUserObject.id)
-            setCompleteButtonFilter(true)
-        } else if (!doneUserObject.admin && completeButtonFilter === true) {
-            const myCompleteButtonFilterTask = tasks.filter(task => task.completion === doneUserObject.id)
-            setCompleteButtonFilter(false)
-        }
-    }
-
 
 
     //~ observes state of tasks and displays task according to login...
@@ -120,6 +100,25 @@ export const TaskList = () => {
         },
         [tasks]
     )
+
+    const unCheckButton = () => {
+
+        completeButtonFilter
+            ? setCompleteButtonFilter(false)
+            : !completeButtonFilter
+                ? setCompleteButtonFilter(true)
+                : buttonFilter
+                    ? setButtonFilter(false)
+                    : <></>
+    }
+
+    const changeTaskView = (evt) => {
+        setButtonFilter(evt)
+        if (completeButtonFilter === buttonFilter) {
+            const myCompleteFilteredTask = tasks.filter(task => task.userId === doneUserObject.id && completeButtonFilter === true)
+            setFilteredTasks(myCompleteFilteredTask)
+        }
+    }
 
 
     //! function runs when delete button is clicked...Deleting the task from API
@@ -220,8 +219,8 @@ export const TaskList = () => {
                                 {
                                     doneUserObject.admin
                                         ? <>
-                                            <Button type="button" className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</Button>
-                                            <Button type="button" className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</Button>
+                                            <Button type="button" className="btn btn__tasks" onClick={() => changeTaskView(false)}>All Tasks</Button>
+                                            <Button type="button" className="btn btn__tasks" onClick={() => changeTaskView(true)}>My Tasks</Button>
                                         </> : <></>
                                 }
                             </>
