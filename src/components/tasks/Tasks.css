@@ -12,24 +12,16 @@
 
 .btn:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
-    outline: 0;
-}
-
-.btn:focus {
-
-    outline: 0;
 }
 
 
 #btn_completed-undone:hover {
     color: #e77e15;
     background-color: rgb(247, 245, 242);
-    outline: 0;
 }
 
 .btn__tasks {
     margin: .2rem;
-    outline: 0;
 }
 
 .btn__btn--section {

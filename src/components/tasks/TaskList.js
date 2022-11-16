@@ -53,7 +53,6 @@ export const TaskList = () => {
         []
     )
 
-
     //? observe buttonFilter state
     useEffect(
         () => {
@@ -68,7 +67,6 @@ export const TaskList = () => {
         [buttonFilter]
     )
 
-
     //* observe completeButtonFilter state
     useEffect(
         () => {
@@ -82,8 +80,6 @@ export const TaskList = () => {
         },
         [completeButtonFilter]
     )
-
-
 
     //~ observes state of tasks and displays task according to login...
     useEffect(
@@ -107,19 +103,17 @@ export const TaskList = () => {
             ? setCompleteButtonFilter(false)
             : !completeButtonFilter
                 ? setCompleteButtonFilter(true)
-                : buttonFilter
+                : buttonFilter && completeButtonFilter
                     ? setButtonFilter(false)
                     : <></>
     }
 
     const changeTaskView = (evt) => {
         setButtonFilter(evt)
-        if (completeButtonFilter === buttonFilter) {
-            const myCompleteFilteredTask = tasks.filter(task => task.userId === doneUserObject.id && completeButtonFilter === true)
-            setFilteredTasks(myCompleteFilteredTask)
-        }
+        completeButtonFilter
+            ? setCompleteButtonFilter(false) && setButtonFilter(evt)
+            : <></>
     }
-
 
     //! function runs when delete button is clicked...Deleting the task from API
     const deleteTaskButton = (event, task) => {
@@ -147,7 +141,6 @@ export const TaskList = () => {
             ? deleteTaskButton(event, task)
             : <></>
     }
-
 
     //~ isDone is a function that will be invoked within the button code and handle the state of signaling a task as done.
     const closeTask = (event, task) => {
@@ -213,7 +206,7 @@ export const TaskList = () => {
                     <Row className="done_task-row">
                         <h2>List of Tasks</h2>
                     </Row>
-                    <section className="btn__btn--section mb-3">
+                    <section className="btn__btn--section mb-">
                         <div className="btn__btn--section1 ">
                             <>
                                 {
