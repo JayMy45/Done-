@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* Navbar styles */
+        .navbar {
+            background-color: #333;
+            padding: 10px;
+            position: relative;
+            height: 50px;
+        }
+
+        /* Set the container position and size */
+        .container {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Set the dog image as the background */
+        .dog {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('path/to/dog-image.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: bark 1s infinite;
+        }
+
+        /* Replace the dog image with stick figure lines */
+        .dog::before,
+        .dog::after {
+            content: "";
+            position: absolute;
+            background-color: black;
+        }
+
+        /* Customize the stick figure appearance */
+        .dog::before {
+            width: 2px;
+            height: 25px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .dog::after {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Pause the animation on hover */
+        .dog:hover {
+            animation-play-state: paused;
+        }
+
+        /* Define the keyframe animation for barking effect */
+        @keyframes bark {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(-50%, -50%) rotate(10deg);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            75% {
+                transform: translate(-50%, -50%) rotate(-10deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="container">
+            <div class="dog"></div>
+        </div>
+    </div>
+</body>
+
+</html>
