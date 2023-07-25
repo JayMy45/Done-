@@ -10,7 +10,7 @@ export const UserNav = () => {
 
     return (
         <>
-            <Navbar bg="dark" expand="sm" variant="dark">
+            <Navbar bg="dark" expand="sm" variant="dark" className="fixed-top">
                 <Container>
 
                     <Navbar.Brand href="/">

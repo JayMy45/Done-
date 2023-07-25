@@ -200,7 +200,7 @@ export const TaskList = () => {
     }
 
     return <Container>
-        <Form>
+        <Form className="">
             <>
                 <div className="done_task-banner">
                     <Row className="done_task-row">
