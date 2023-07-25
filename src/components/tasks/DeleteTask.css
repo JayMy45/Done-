@@ -6,7 +6,8 @@ figcaption {
 }
 
 .powered__by-bottom-base {
-    margin-top: 85%;
+    margin-top: 10%;
+    text-align: center;
 }
 
 @media screen and (max-width: 768px) {

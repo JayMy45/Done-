@@ -37,7 +37,7 @@ export const AdminViews = () => {
                 <>
                     {
 
-                        <div id="margin-right">
+                        <div id="margin-right" className="mt-5 pt-4">
                             {
                                 users.map(
                                     (user) => {

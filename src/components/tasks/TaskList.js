@@ -53,7 +53,6 @@ export const TaskList = () => {
         []
     )
 
-
     //? observe buttonFilter state
     useEffect(
         () => {
@@ -68,7 +67,6 @@ export const TaskList = () => {
         [buttonFilter]
     )
 
-
     //* observe completeButtonFilter state
     useEffect(
         () => {
@@ -82,27 +80,6 @@ export const TaskList = () => {
         },
         [completeButtonFilter]
     )
-
-    const unCheckButton = () => {
-
-        if (completeButtonFilter === true && doneUserObject.admin === true) {
-            setCompleteButtonFilter(false)
-        } else if (completeButtonFilter === false && doneUserObject.admin === true) {
-            setCompleteButtonFilter(true)
-        }
-    }
-    const unCheckUserButton = () => {
-
-        if (!doneUserObject.admin && completeButtonFilter === false) {
-            const myCompleteButtonFilterTask = tasks.filter(task => task.completion === doneUserObject.id)
-            setCompleteButtonFilter(true)
-        } else if (!doneUserObject.admin && completeButtonFilter === true) {
-            const myCompleteButtonFilterTask = tasks.filter(task => task.completion === doneUserObject.id)
-            setCompleteButtonFilter(false)
-        }
-    }
-
-
 
     //~ observes state of tasks and displays task according to login...
     useEffect(
@@ -120,10 +97,28 @@ export const TaskList = () => {
         [tasks]
     )
 
+    const unCheckButton = () => {
+
+        completeButtonFilter
+            ? setCompleteButtonFilter(false)
+            : !completeButtonFilter
+                ? setCompleteButtonFilter(true)
+                : buttonFilter && completeButtonFilter
+                    ? setButtonFilter(false)
+                    : <></>
+    }
+
+    const changeTaskView = (evt) => {
+        setButtonFilter(evt)
+        completeButtonFilter
+            ? setCompleteButtonFilter(false) && setButtonFilter(evt)
+            : <></>
+    }
 
     //! function runs when delete button is clicked...Deleting the task from API
     const deleteTaskButton = (event, task) => {
         //needed to add task as a parameter (along with the clickEvent) in order to capture the task Object being chosen
+
         return fetch(`http://localhost:8088/tasks/${task.id}`, {
             method: "DELETE"
         })
@@ -137,6 +132,14 @@ export const TaskList = () => {
                 []
             )
 
+    }
+
+    const confirmDelete = (event, task) => {
+        // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
+        let text = 'Are you sure you want to delete'
+        window.confirm(text)
+            ? deleteTaskButton(event, task)
+            : <></>
     }
 
     //~ isDone is a function that will be invoked within the button code and handle the state of signaling a task as done.
@@ -168,21 +171,49 @@ export const TaskList = () => {
 
     }
 
+    const openTask = (event, task) => {
+
+        const toBeSavedToAPI = {
+            userId: task.userId,
+            completion: false,
+            instructions: task.instructions,
+            typeId: task.typeId
+        }
+        return fetch(`http://localhost:8088/tasks/${task.id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(toBeSavedToAPI)
+        })
+            .then(response => response.json())
+            .then(() => {
+                fetch(`http://localhost:8088/tasks?_expand=type&_expand=user`)
+                    .then(response => response.json())
+                    .then((taskArray) => {
+                        setTasks(taskArray)
+                    })
+            },
+                []
+            )
+
+    }
+
     return <Container>
-        <Form>
+        <Form className="">
             <>
                 <div className="done_task-banner">
                     <Row className="done_task-row">
                         <h2>List of Tasks</h2>
                     </Row>
-                    <section className="btn__btn--section mb-3">
+                    <section className="btn__btn--section mb-">
                         <div className="btn__btn--section1 ">
                             <>
                                 {
                                     doneUserObject.admin
                                         ? <>
-                                            <Button className="btn btn__tasks" onClick={() => setButtonFilter(false)}>All Tasks</Button>
-                                            <Button className="btn btn__tasks" onClick={() => setButtonFilter(true)}>My Tasks</Button>
+                                            <Button type="button" className="btn btn__tasks" onClick={() => changeTaskView(false)}>All Tasks</Button>
+                                            <Button type="button" className="btn btn__tasks" onClick={() => changeTaskView(true)}>My Tasks</Button>
                                         </> : <></>
                                 }
                             </>
@@ -253,14 +284,14 @@ export const TaskList = () => {
                                                         doneUserObject.admin
                                                             ? <>
                                                                 <Button variant="primary" size="sm" className="btn btn__ticketList btn__update" onClick={() => navigate(`/tasks/update/${task.id}`)}>UPDATE</Button>
-                                                                <Button variant="danger" size="sm" className="btn btn__ticketList btn__delete" onClick={(clickEvent) => deleteTaskButton(clickEvent, task)}>DELETE</Button>
+                                                                <Button variant="danger" size="sm" className="btn btn__ticketList btn__delete" onClick={(clickEvent) => confirmDelete(clickEvent, task)}>DELETE</Button>
 
                                                             </> : <></>
                                                     }
                                                 </>
                                                 {
                                                     task.completion
-                                                        ? <div className="done__task--complete">Completed!</div>
+                                                        ? <div className="done__task--complete"><Button className="btn-link" id="btn_completed-undone" onClick={(clickEvent) => openTask(clickEvent, task)}>Completed!</Button></div>
                                                         : <Button variant="success" className="btn btn btn__done" onClick={(clickEvent) => closeTask(clickEvent, task)}><strong><em>un</em>DONE<span>&#8253;</span></strong></Button>
                                                 }
 

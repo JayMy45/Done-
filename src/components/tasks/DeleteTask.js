@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import nashvilleYeah from "/Users/jeremymyers/workspace/done-capstone/src/IMG_0672.jpeg"
 import logoOG from "/Users/jeremymyers/workspace/done-capstone/src/Done.Logo.OG.png"
 import "./DeleteTask.css"
@@ -14,9 +16,11 @@ export const DeleteTasks = () => {
     const [types, setTypes] = useState([])
     const [users, setUsers] = useState([])
 
+
     const localDoneUser = localStorage.getItem("done_user")
     const doneUserObject = JSON.parse(localDoneUser)
 
+    const navigate = useNavigate()
 
     useEffect(
         () => {
@@ -44,8 +48,32 @@ export const DeleteTasks = () => {
         []
     )
 
+    const deleteTypeButton = (evt, type) => {
+        //needed to add task as a parameter (along with the clickEvent) in order to capture the task Object being chosen
+        return fetch(`http://localhost:8088/types/${type}`, {
+            method: "DELETE"
+        })
+            .then(() => {
+                fetch(`http://localhost:8088/types?_sort=name`)
+                    .then(response => response.json())
+                    .then((typesArray) => {
+                        setTypes(typesArray)
+                    })
+            },
+                []
+            )
 
+    }
 
+    const confirmDelete = (event, type) => {
+        // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean
+        event.preventDefault()
+
+        let text = 'Are you sure you want to delete'
+        window.confirm(text)
+            ? deleteTypeButton(event, type)
+            : <></>
+    }
 
     return <>
         {
@@ -88,9 +116,14 @@ export const DeleteTasks = () => {
                                                     return <ListGroup.Item
                                                         name="location"
                                                         className="form-control dropdown"
+                                                        id="done_type"
                                                         value={type.id}
                                                         key={`user--${type.id}`}
-                                                    >{type.name}</ListGroup.Item>
+                                                    >{type.name}
+                                                        <div className="" >
+                                                            <Button className="btn-danger btn-sm" onClick={(evt) => confirmDelete(evt, type.id)}>Delete</Button>
+                                                        </div>
+                                                    </ListGroup.Item>
                                                 }
                                             )}
                                         </ListGroup>

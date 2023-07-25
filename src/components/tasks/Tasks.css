@@ -12,7 +12,12 @@
 
 .btn:hover {
     box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
 
+
+#btn_completed-undone:hover {
+    color: #e77e15;
+    background-color: rgb(247, 245, 242);
 }
 
 .btn__tasks {
@@ -55,8 +60,12 @@
     background-color: rgb(127, 191, 78);
     margin-right: .8rem;
     margin-left: 4px;
+}
 
-
+#done_type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .btn__ticketList {
